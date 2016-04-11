@@ -1,0 +1,17 @@
+Dashboard: {
+    required: [
+        name: string
+    ],
+    optional: [
+        tiles: list,
+        base: string,
+        extras: object
+    ],
+    get: -> {
+        tiles + dashboard[base][tiles]
+            + extras[tiles] + dashboard[extras[base]][tiles]
+    },
+    setName: -> n {
+        name: n
+    }
+}

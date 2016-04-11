@@ -1,0 +1,34 @@
+Main: {
+    run: {
+        dashboard: {
+            name: 'homeBase',
+            tiles: ['lights', 'tv', 'pc', 'security']
+        }
+        dashboard: {
+            name: 'home',
+            base: 'homeBase',
+            extras: {
+                tiles: ['sys', 'lectric', 'water']
+            }
+        }
+        dashboard: {
+            name: 'work',
+            tiles: ['code', 'hours', 'avg', 'issues']
+        }
+        dashboard: {
+            name: 'overall',
+            base: 'work',
+            extras: {
+                base: 'home',
+                tiles: ['games']
+            },
+            tiles: ['trends', 'notes']
+        }
+        dashboard: {
+            name: 'all',
+            base: 'overall'
+        }
+        
+        dashboard['overall']
+    }
+}

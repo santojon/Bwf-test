@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Example</title>
+	</head>
+	<body class="container">
+		<h1 class="txt">Example</h1>
+		<script type="text/javascript" src="bwf.js"></script>
+		<script type="text/javascript">
+			(function() {
+				new Bwf('Dashboard: {\
+                            required: [\
+                                name: string\
+                            ],\
+                            optional: [\
+                                tiles: list,\
+                                base: string,\
+                                extras: object\
+                            ],\
+                            get: -> {\
+                            	tiles\
+                            }\
+                        }');
+                Dashboard.prototype.test = function() {
+                	console.log('tset');
+                };
+                var dashboard = new Dashboard({
+				    				name: 'homeBase',
+				    				tiles: ['lights', 'tv', 'pc', 'security'],
+				    				extras: {
+				    					tiles: ['time tracking', 'issues']
+				    				}
+				    			});
+				console.log(dashboard);
+    			console.log(dashboard.get());
+    			dashboard.test();
+			})();
+		</script>
+	</body>
+</html>
