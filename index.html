@@ -6,17 +6,21 @@
 		<style type="text/css">
 			.dashboard {
 				float: left !important;
-				margin-right: 2% !important;
-				width: 48% !important;
+				margin-top: 10px !important;
+				margin-right: 2.334% !important;
+				width: 31% !important;
 				font-size: 15px !important;
+			}
+			
+			.container {
+				margin-top: 20px !important;
 			}
 		</style>
 	</head>
 	<body class="container">
 		<h1 class="txt">Dashboards</h1>
-		<div id="dashboards">
-			
-		</div>
+		<div id="dashboards"></div>
+		
 		<script type="text/javascript" src="bwf.js"></script>
 		<script type="text/javascript" src="dashboard.js"></script>
 		<script type="text/javascript" src="https://santojon.github.io/Dogefy/dist/dogefy.min.js"></script>
@@ -25,10 +29,7 @@
 				// Create Dashboards
                 var dashboard = new Dashboard({
 				    				name: 'homeBase',
-				    				tiles: ['lights', 'tv', 'pc', 'security'],
-				    				extras: {
-				    					tiles: ['time tracking', 'issues']
-				    				}
+				    				tiles: ['lights', 'water', 'tv', 'pc', 'security', 'cameras']
 				    			});
 				//console.log(dashboard);
     			//console.log(dashboard.get());
@@ -41,10 +42,19 @@
 				    					tiles: ['games', 'stats']
 				    				}
 				    			});
+				    			
+				var dashboard3 = new Dashboard({
+				    				name: 'work',
+				    				tiles: ['tasks', 'hours', 'coffee', 'slack', 'time tracking', 'issues'],
+				    				extras: {
+				    					tiles: ['news', 'forecast', 'traffic']
+				    				}
+				    			});
     			
     			// Add then to screen
     			appendDashboard('dashboards', dashboard);
     			appendDashboard('dashboards', dashboard2);
+    			appendDashboard('dashboards', dashboard3);
 			})();
 		</script>
 	</body>

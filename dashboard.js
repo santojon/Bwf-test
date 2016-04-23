@@ -19,14 +19,21 @@ new Bwf('Dashboard: {\
  */
 Dashboard.prototype.toHtml = function(cls) {
 	var db = this;
-	var htmlStr = '<div class="jumbotron well ' + (cls || '') + '">';
+	var htmlStr = '';
+	if (cls) {
+	    htmlStr = '<div class="panel panel-default ' + (cls || '') + '">';
+	    htmlStr = htmlStr + '<div class="panel-heading">' + db['name'] + '</div>';
+	    htmlStr = htmlStr + '<div class="panel-body">';
+	}
 	
 	Object.keys(db).forEach(
 		function(key) {
 			switch (typeof db[key]) {
 				case 'string':
-					htmlStr = htmlStr + '<p>' 
-						+ key + ': <code>' + db[key] + '</code></p>';
+				    if (!(key === 'name')) {
+				        htmlStr = htmlStr + '<p>' 
+    						+ key + ': <code>' + db[key] + '</code></p>';
+				    }
 					break;
 				case 'number':
 					htmlStr = htmlStr + '<p>' 
@@ -34,23 +41,24 @@ Dashboard.prototype.toHtml = function(cls) {
 					break;
 				case 'object':
 					if (db[key] instanceof Array) {
-						htmlStr = htmlStr + '<p>' + key + ':';
+						htmlStr = htmlStr + '<p>' + key + ':<ul>';
     					db[key].forEach(
     						function(k) {
-    							htmlStr = htmlStr + '<p><code>' +
-    								k + '</code></p>';
+    							htmlStr = htmlStr + '<li><code>' +
+    								k + '</code></li>';
     						}
     					);
-    					htmlStr = htmlStr + '</p>';
+    					htmlStr = htmlStr + '</ul>';
 					} else {
-						htmlStr = htmlStr + '<p>' + key + ':'
-								+ new Dashboard(db[key]).toHtml() + '</p>';
+						htmlStr = htmlStr + '<p>' + key + ':</p>' +
+						    '<div class="col-xs-11 col-xs-offset-1">'
+								+ new Dashboard(db[key]).toHtml() + '</div>';
 					}
 					break;
 			}
 		}
 	);
-	return htmlStr + '</div>';
+	return htmlStr + '</div></div>';
 };
 
 /**
