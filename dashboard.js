@@ -38,7 +38,7 @@ Dashboard.prototype.toHtml = function(cls) {
     					db[key].forEach(
     						function(k) {
     							htmlStr = htmlStr + '<p><code>' +
-    								k + ',</code></p>';
+    								k + '</code></p>';
     						}
     					);
     					htmlStr = htmlStr + '</p>';
