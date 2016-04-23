@@ -24,7 +24,6 @@ function Bwf(elem, options) {
             });\
             return c;\
         };';
-        
         var klass = eval(code);
         
         keys.forEach(function(key) {

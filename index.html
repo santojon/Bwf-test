@@ -2,10 +2,23 @@
 <html lang="en">
 	<head>
 		<title>Example</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+		<style type="text/css">
+			.dashboard {
+				float: left !important;
+				margin-right: 2% !important;
+				width: 48% !important;
+				font-size: 15px !important;
+			}
+		</style>
 	</head>
 	<body class="container">
-		<h1 class="txt">Example</h1>
+		<h1 class="txt">Dashboards</h1>
+		<div id="dashboards">
+			
+		</div>
 		<script type="text/javascript" src="bwf.js"></script>
+		<script type="text/javascript" src="https://santojon.github.io/Dogefy/dist/dogefy.min.js"></script>
 		<script type="text/javascript">
 			(function() {
 				new Bwf('Dashboard: {\
@@ -21,9 +34,53 @@
                             	tiles\
                             }\
                         }');
-                Dashboard.prototype.test = function() {
-                	console.log('tset');
+                Dashboard.prototype.toHtml = function(cls) {
+                	var db = this;
+                	var htmlStr = '<div class="jumbotron well ' + (cls || '') + '">';
+                	
+                	Object.keys(db).forEach(
+                		function(key) {
+                			switch (typeof db[key]) {
+                				case 'string':
+                					htmlStr = htmlStr + '<p>' 
+                						+ key + ': <code>' + db[key] + '</code></p>';
+                					break;
+                				case 'object':
+                					if (db[key] instanceof Array) {
+                						htmlStr = htmlStr + '<p>' + key + ':';
+	                					db[key].forEach(
+	                						function(k) {
+	                							htmlStr = htmlStr + '<p><code>' +
+	                								k + ',</code></p>';
+	                						}
+	                					);
+	                					htmlStr = htmlStr + '</p>';
+                					} else {
+                						htmlStr = htmlStr + '<p>' + key + ':'
+                								+ new Dashboard(db[key]).toHtml() + '</p>';
+                					}
+                					break;
+                			}
+                		}
+                	);
+                	return htmlStr + '</div>';
                 };
+                
+                function appendDashboard(id, dashboard) {
+    				var div, target = document.getElementById(id);
+	    			div = document.createElement('div');
+	    			
+	    			div.innerHTML = dashboard.toHtml('dashboard');
+	    			target.appendChild(div);
+	    			
+	    			while (div.firstChild) {
+				        // Also removes child nodes from 'div'
+				        target.insertBefore(div.firstChild, div);
+				    }
+				    // Remove 'div' element from target element
+				    target.removeChild(div);
+	    		};
+                
                 var dashboard = new Dashboard({
 				    				name: 'homeBase',
 				    				tiles: ['lights', 'tv', 'pc', 'security'],
@@ -31,9 +88,20 @@
 				    					tiles: ['time tracking', 'issues']
 				    				}
 				    			});
-				console.log(dashboard);
-    			console.log(dashboard.get());
-    			dashboard.test();
+				//console.log(dashboard);
+    			//console.log(dashboard.get());
+    			
+    			var dashboard2 = new Dashboard({
+				    				name: 'home',
+				    				base: 'homeBase',
+				    				tiles: ['locks', 'people'],
+				    				extras: {
+				    					tiles: ['games', 'stats']
+				    				}
+				    			});
+    			
+    			appendDashboard('dashboards', dashboard);
+    			appendDashboard('dashboards', dashboard2);
 			})();
 		</script>
 	</body>
