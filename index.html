@@ -45,6 +45,10 @@
                 					htmlStr = htmlStr + '<p>' 
                 						+ key + ': <code>' + db[key] + '</code></p>';
                 					break;
+                				case 'number':
+                					htmlStr = htmlStr + '<p>' 
+                						+ key + ': <code>' + db[key] + '</code></p>';
+                					break;
                 				case 'object':
                 					if (db[key] instanceof Array) {
                 						htmlStr = htmlStr + '<p>' + key + ':';
