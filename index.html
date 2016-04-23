@@ -18,73 +18,11 @@
 			
 		</div>
 		<script type="text/javascript" src="bwf.js"></script>
+		<script type="text/javascript" src="dashboard.js"></script>
 		<script type="text/javascript" src="https://santojon.github.io/Dogefy/dist/dogefy.min.js"></script>
 		<script type="text/javascript">
 			(function() {
-				new Bwf('Dashboard: {\
-                            required: [\
-                                name: string\
-                            ],\
-                            optional: [\
-                                tiles: list,\
-                                base: string,\
-                                extras: object\
-                            ],\
-                            get: -> {\
-                            	tiles\
-                            }\
-                        }');
-                Dashboard.prototype.toHtml = function(cls) {
-                	var db = this;
-                	var htmlStr = '<div class="jumbotron well ' + (cls || '') + '">';
-                	
-                	Object.keys(db).forEach(
-                		function(key) {
-                			switch (typeof db[key]) {
-                				case 'string':
-                					htmlStr = htmlStr + '<p>' 
-                						+ key + ': <code>' + db[key] + '</code></p>';
-                					break;
-                				case 'number':
-                					htmlStr = htmlStr + '<p>' 
-                						+ key + ': <code>' + db[key] + '</code></p>';
-                					break;
-                				case 'object':
-                					if (db[key] instanceof Array) {
-                						htmlStr = htmlStr + '<p>' + key + ':';
-	                					db[key].forEach(
-	                						function(k) {
-	                							htmlStr = htmlStr + '<p><code>' +
-	                								k + ',</code></p>';
-	                						}
-	                					);
-	                					htmlStr = htmlStr + '</p>';
-                					} else {
-                						htmlStr = htmlStr + '<p>' + key + ':'
-                								+ new Dashboard(db[key]).toHtml() + '</p>';
-                					}
-                					break;
-                			}
-                		}
-                	);
-                	return htmlStr + '</div>';
-                };
-                
-                function appendDashboard(id, dashboard) {
-    				var div, target = document.getElementById(id);
-	    			div = document.createElement('div');
-	    			
-	    			div.innerHTML = dashboard.toHtml('dashboard');
-	    			target.appendChild(div);
-	    			
-	    			while (div.firstChild) {
-				        // Also removes child nodes from 'div'
-				        target.insertBefore(div.firstChild, div);
-				    }
-				    // Remove 'div' element from target element
-				    target.removeChild(div);
-	    		};
-                
+				// Create Dashboards
                 var dashboard = new Dashboard({
 				    				name: 'homeBase',
 				    				tiles: ['lights', 'tv', 'pc', 'security'],
@@ -104,6 +42,7 @@
 				    				}
 				    			});
     			
+    			// Add then to screen
     			appendDashboard('dashboards', dashboard);
     			appendDashboard('dashboards', dashboard2);
 			})();
