@@ -1,7 +1,8 @@
 // Create new class from string definition
 new Bwf('Dashboard: {\
             required: [\
-                name: string\
+                name: string,\
+                owner: object\
             ],\
             optional: [\
                 tiles: list,\
@@ -49,6 +50,9 @@ Dashboard.prototype.toHtml = function(cls) {
     						}
     					);
     					htmlStr = htmlStr + '</ul>';
+					} else if (db[key] instanceof User) {
+						htmlStr = htmlStr + '<p>' 
+							+ key + ': <code>' + db[key]['username'] + '</code></p>';
 					} else {
 						htmlStr = htmlStr + '<p>' + key + ':</p>' +
 						    '<div class="col-xs-11 col-xs-offset-1">'

@@ -7,8 +7,9 @@
 			.dashboard {
 				float: left !important;
 				margin-top: 10px !important;
-				margin-right: 2.334% !important;
-				width: 31% !important;
+				margin-right: 1.5% !important;
+				min-width: 50px !important;
+				max-width: 24% !important;
 				font-size: 15px !important;
 			}
 			
@@ -18,17 +19,23 @@
 		</style>
 	</head>
 	<body class="container">
-		<h1 class="txt">Dashboards</h1>
+		<h1 id="title">Dashboards</h1>
 		<div id="dashboards"></div>
 		
 		<script type="text/javascript" src="bwf.js"></script>
+		<script type="text/javascript" src="user.js"></script>
 		<script type="text/javascript" src="dashboard.js"></script>
 		<script type="text/javascript" src="https://santojon.github.io/Dogefy/dist/dogefy.min.js"></script>
 		<script type="text/javascript">
 			(function() {
+				var me = new User({username: 'santojon'});
+				var div = document.createElement('small');
+				div.innerHTML = ' <code>' + me.username + '</code>';
+				document.getElementById('title').appendChild(div);
 				// Create Dashboards
                 var dashboard = new Dashboard({
 				    				name: 'homeBase',
+				    				owner: me,
 				    				tiles: ['lights', 'water', 'tv', 'pc', 'security', 'cameras']
 				    			});
 				//console.log(dashboard);
@@ -36,6 +43,7 @@
     			
     			var dashboard2 = new Dashboard({
 				    				name: 'home',
+				    				owner: me,
 				    				base: 'homeBase',
 				    				tiles: ['locks', 'people'],
 				    				extras: {
@@ -45,9 +53,21 @@
 				    			
 				var dashboard3 = new Dashboard({
 				    				name: 'work',
+				    				owner: me,
 				    				tiles: ['tasks', 'hours', 'coffee', 'slack', 'time tracking', 'issues'],
 				    				extras: {
 				    					tiles: ['news', 'forecast', 'traffic']
+				    				}
+				    			});
+				 
+				var dashboard4 = new Dashboard({
+				    				name: 'overall',
+				    				owner: me,
+				    				base: 'home',
+				    				tiles: ['kids', 'wife', 'to-do lists'],
+				    				extras: {
+				    					base: 'work',
+				    					tiles: ['family', 'calendar', 'hollidays']
 				    				}
 				    			});
     			
@@ -55,6 +75,7 @@
     			appendDashboard('dashboards', dashboard);
     			appendDashboard('dashboards', dashboard2);
     			appendDashboard('dashboards', dashboard3);
+    			appendDashboard('dashboards', dashboard4);
 			})();
 		</script>
 	</body>
