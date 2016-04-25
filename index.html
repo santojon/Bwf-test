@@ -2,88 +2,13 @@
 <html lang="en">
 	<head>
 		<title>Example</title>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-		<style type="text/css">
-			.dashboard {
-				float: left !important;
-				margin-top: 10px !important;
-				margin-right: 1.5% !important;
-				min-width: 50px !important;
-				max-width: 24% !important;
-				font-size: 15px !important;
-			}
-			
-			.container {
-				margin-top: 20px !important;
-			}
-		</style>
 	</head>
 	<body class="container">
 		<h1 id="title">Dashboards</h1>
 		<div id="dashboards"></div>
 		
-		<script type="text/javascript" src="bwf.js"></script>
-		<script type="text/javascript" src="user.js"></script>
-		<script type="text/javascript" src="dashboard.js"></script>
+		<script type="text/javascript" src="lib/base.js"></script>
+		<script type="text/javascript" src="app.js"></script>
 		<script type="text/javascript" src="https://santojon.github.io/Dogefy/dist/dogefy.min.js"></script>
-		<script type="text/javascript">
-			(function() {
-				var me = new User({username: 'santojon'});
-				var div = document.createElement('small');
-				div.innerHTML = ' <code>' + me.username + '</code>';
-				document.getElementById('title').appendChild(div);
-				// Create Dashboards
-                var dashboard = new Dashboard({
-				    				name: 'homeBase',
-				    				owner: me,
-				    				tiles: ['lights', 'water', 'tv', 'pc', 'security', 'cameras']
-				    			});
-				//console.log(dashboard);
-    			//console.log(dashboard.get());
-    			
-    			var dashboard2 = new Dashboard({
-				    				name: 'home',
-				    				owner: me,
-				    				base: 'homeBase',
-				    				tiles: ['locks', 'people'],
-				    				extras: {
-				    					tiles: ['games', 'stats']
-				    				}
-				    			});
-				    			
-				var dashboard3 = new Dashboard({
-				    				name: 'work',
-				    				owner: me,
-				    				tiles: ['tasks', 'hours', 'coffee', 'slack', 'time tracking', 'issues'],
-				    				extras: {
-				    					tiles: ['news', 'forecast', 'traffic']
-				    				}
-				    			});
-				 
-				var dashboard4 = new Dashboard({
-				    				name: 'overall',
-				    				owner: me,
-				    				base: 'home',
-				    				tiles: ['kids', 'wife', 'to-do lists'],
-				    				extras: {
-				    					base: 'work',
-				    					tiles: ['family', 'calendar', 'hollidays']
-				    				}
-				    			});
-				
-				var dashboard5 = new Dashboard({
-				    				name: 'all',
-				    				owner: me,
-				    				base: 'overall'
-				    			});
-    			
-    			// Add then to screen
-    			appendDashboard('dashboards', dashboard);
-    			appendDashboard('dashboards', dashboard2);
-    			appendDashboard('dashboards', dashboard3);
-    			appendDashboard('dashboards', dashboard4);
-    			appendDashboard('dashboards', dashboard5);
-			})();
-		</script>
 	</body>
 </html>

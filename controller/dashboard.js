@@ -81,4 +81,55 @@ function appendDashboard(id, dashboard) {
     }
     // Remove 'div' element from target element
     target.removeChild(div);
-};
+}
+
+
+
+
+// ----------------------------------------------------------
+// Create Dashboards
+// ----------------------------------------------------------
+
+var dashboard = new Dashboard({
+	    				name: 'homeBase',
+	    				owner: me,
+	    				tiles: ['lights', 'water', 'tv', 'pc', 'security', 'cameras']
+	    			});
+//console.log(dashboard);
+//console.log(dashboard.get());
+    			
+var dashboard2 = new Dashboard({
+	    				name: 'home',
+	    				owner: me,
+	    				base: 'homeBase',
+	    				tiles: ['locks', 'people'],
+	    				extras: {
+	    					tiles: ['games', 'stats']
+	    				}
+	    			});
+	    			
+var dashboard3 = new Dashboard({
+	    				name: 'work',
+	    				owner: me,
+	    				tiles: ['tasks', 'hours', 'coffee', 'slack', 'time tracking', 'issues'],
+	    				extras: {
+	    					tiles: ['news', 'forecast', 'traffic']
+	    				}
+	    			});
+				 
+var dashboard4 = new Dashboard({
+	    				name: 'overall',
+	    				owner: me,
+	    				base: 'home',
+	    				tiles: ['kids', 'wife', 'to-do lists'],
+	    				extras: {
+	    					base: 'work',
+	    					tiles: ['family', 'calendar', 'hollidays']
+	    				}
+	    			});
+				
+var dashboard5 = new Dashboard({
+	    				name: 'all',
+	    				owner: me,
+	    				base: 'overall'
+	    			});
