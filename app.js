@@ -1,5 +1,5 @@
 /**
- * The app itself. It need the 'base.js' file in env.
+ * The app itself. It need 'base.js' loaded to work
  */
 loadStyle('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', function() {
     loadStyle('assets/css/style.css', function() {
