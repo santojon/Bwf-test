@@ -1,3 +1,4 @@
+// Class definition
 new Bwf('User: {\
             required: [\
                 username: string,\
@@ -10,6 +11,12 @@ new Bwf('User: {\
             	dashboards\
             }\
         }');
-        
+
+
+
+// ----------------------------------------------
+// Create instances
+// ----------------------------------------------
+
 var me = new User({username: 'santojon'});
 var other = new User({username: 'blah'});
