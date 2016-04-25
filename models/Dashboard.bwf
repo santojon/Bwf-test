@@ -1,6 +1,7 @@
 Dashboard: {
     required: [
-        name: string
+        name: string,
+        owner: object
     ],
     optional: [
         tiles: list,

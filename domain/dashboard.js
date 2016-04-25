@@ -1,4 +1,5 @@
 // Create new class from string definition
+//readTextFile('model/Dashboard.bwf');
 new Bwf('Dashboard: {\
             required: [\
                 name: string,\
