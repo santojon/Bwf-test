@@ -35,6 +35,41 @@ function changeDashBoard() {
 }
 
 /**
+ * Create a new dashboard
+ */
+function createDashboard() {
+    var userVar;
+    
+    var w = window;
+    Object.keys(window).forEach(
+        function(v) {
+            if (w[v] instanceof User) {
+                if (w[v].username === document.getElementById('currentUser').innerHTML) {
+                    userVar = w[v];
+                }
+            }
+        }
+    );
+    
+    var d = new Dashboard({
+	    				name: 'new',
+	    				owner: userVar,
+	    				base: 'home',
+	    				tiles: ['to-do lists'],
+	    				extras: {
+	    					base: 'all',
+	    					tiles: ['calendar', 'hollidays']
+	    				}
+	    			});
+	
+	var varName = d['name'] + '-dashboard' + Math.random();
+	if (!window[varName]) {
+	    window[varName] = d;
+	    appendDashboard('dashboards', d);
+	}
+}
+
+/**
  * Function responsible to add a HTML description of a dashboard to screen
  */
 function appendDashboard(id, dashboard) {

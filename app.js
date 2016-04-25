@@ -32,8 +32,7 @@ loadScript('loader.js', function() {
         	}
         );
         
-        
-        document.getElementById('btn-chg-usr');
+        document.getElementById('btn-create-dshb').onclick = createDashboard;
         
     // Adjust this time for your needs/requirements
     }, 1500);
