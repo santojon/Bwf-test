@@ -1,26 +1,27 @@
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+## Bwf (Bewulf)
 
+A tool to define javascript classes easily.   
+Example:
 
-Hi there! Welcome to Cloud9 IDE!
+'''
+new Bwf(
+    \'Dashboard: {
+        name: string,
+        tiles: list,
+        base: string,
+        extras: object
+    }\'
+);
+'''
 
-To get you started, we included a small hello world application.
+Will be a class, defined in page scope.
 
-1) Open the hello-world.html file
+### Example app
 
-2) Click on the Preview button to open a live preview pane
+This is an example app too.   
+Here we have an structure with '''base.js''' and '''app.js''', to load all app programatically.
 
-3) Make some changes to the file, save, watch the preview, and have fun!
-
-Happy coding!
-The Cloud9 IDE team
-
-
-## Support & Documentation
-
-Visit http://docs.c9.io for documentation, or http://support.c9.io for support.
-To watch some training videos, visit http://www.youtube.com/user/c9ide
+- Simple HTML page
+- Bwf and 'base' as lib
+- Controllers using Bwf
+- App auto loading *styles* and *controllers*
