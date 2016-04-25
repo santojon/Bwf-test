@@ -19,4 +19,5 @@ new Bwf('User: {\
 // ----------------------------------------------
 
 var me = new User({username: 'santojon'});
-var other = new User({username: 'blah'});
+var blah = new User({username: 'blah'});
+var fu = new User({username: 'manolo'});

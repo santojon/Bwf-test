@@ -3,11 +3,22 @@
 	<head>
 		<title>Example</title>
 	</head>
-	<body class="container">
+	<body>
 		<script type="text/javascript" src="lib/base.js"></script>
 		<script type="text/javascript" src="app.js"></script>
 		
-		<h1 id="title" hidden="hidden">Dashboards</h1>
-		<div id="dashboards"></div>
+		<div class="container">
+			<h1 id="title" hidden="hidden">
+				<div class="btn-group pull-left mRight10">
+					<button id="btn-chg-usr" class="btn btn-default dropdown-toggle"
+								type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Change user <span class="caret"></span>
+					</button>
+					<ul id="chg-lst" class="dropdown-menu"></ul>
+				</div>
+				Dashboards
+			</h1>
+			<div id="dashboards"></div>
+		</div>
 	</body>
 </html>

@@ -78,7 +78,7 @@ Dashboard.prototype.toHtml = function(cls) {
 
 var dashboard = new Dashboard({
 	    				name: 'homeBase',
-	    				owner: me,
+	    				owner: fu,
 	    				tiles: ['lights', 'water', 'tv', 'pc', 'security', 'cameras']
 	    			});
 //console.log(dashboard);
@@ -105,7 +105,7 @@ var dashboard3 = new Dashboard({
 				 
 var dashboard4 = new Dashboard({
 	    				name: 'overall',
-	    				owner: me,
+	    				owner: blah,
 	    				base: 'home',
 	    				tiles: ['kids', 'wife', 'to-do lists'],
 	    				extras: {

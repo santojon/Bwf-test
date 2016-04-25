@@ -9,7 +9,7 @@ loadScript('loader.js', function() {
          
         // add my name to screen
         var div = document.createElement('small');
-        div.innerHTML = ' <code>' + me.username + '</code>';
+        div.innerHTML = ' <code id="currentUser">' + me.username + '</code>';
         document.getElementById('title').appendChild(div);
         	
         // Add all defined dashboards for user 'me' to screen
@@ -20,10 +20,21 @@ loadScript('loader.js', function() {
         			if (w[v].owner === me) {
         				appendDashboard('dashboards', w[v]);
         			}
+        		} else if (w[v] instanceof User) {
+        		    if (w[v] !== me) {
+        		        var li = document.createElement('li');
+                        li.innerHTML = '<a id="' + w[v].username + '-li" ' + 'href="#">' + w[v].username + '</a>';
+        		        document.getElementById('chg-lst').appendChild(li);
+        		        
+        		        document.getElementById(w[v].username + '-li').onclick = changeDashBoard;
+        		    }
         		}
         	}
         );
         
+        
+        document.getElementById('btn-chg-usr');
+        
     // Adjust this time for your needs/requirements
-    }, 1700);
+    }, 1500);
 });
