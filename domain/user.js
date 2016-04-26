@@ -6,11 +6,40 @@ new Bwf('User: {\
             ],\
             optional: [\
                 dashboards: list\
-            ],\
-            get: -> {\
-            	dashboards\
-            }\
+            ]\
         }');
+
+
+
+
+// ------------------------------------------------
+// ORM related static functions
+// ------------------------------------------------
+
+User.add = function(obj) {
+	return dataPool.add(User, obj);
+};
+
+User.remove = function(obj) {
+    return dataPool.remove(User, obj);
+};
+
+User.find = function(opt) {
+    return dataPool.find(User, opt);
+};
+
+User.findLike = function(opt) {
+    return dataPool.findLike(User, opt);
+};
+
+User.findAll = function() {
+    return dataPool.findAll(User);
+};
+
+User.get = function(id) {
+    return dataPool.get(User, id);
+};
+
 
 
 
@@ -18,6 +47,6 @@ new Bwf('User: {\
 // Create instances
 // ----------------------------------------------
 
-var me = new User({username: 'santojon'});
-var blah = new User({username: 'blah'});
-var fu = new User({username: 'manolo'});
+User.add(new User({username: 'santojon'}));
+User.add(new User({username: 'blah'}));
+User.add(new User({username: 'manolo'}));

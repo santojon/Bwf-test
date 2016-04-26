@@ -7,33 +7,39 @@ loadScript('loader.js', function() {
          * The app itself.
          */
          
+         var currentUser = User.find({ username: 'santojon' });
+         var allUsers = User.findAll();
+         
         // add my name to screen
         var div = document.createElement('small');
-        div.innerHTML = ' <code id="currentUser">' + me.username + '</code>';
+        div.innerHTML = ' <code id="currentUser">' + currentUser.username + '</code>';
         document.getElementById('title').appendChild(div);
         	
         // Add all defined dashboards for user 'me' to screen
-        var w = window;
-        Object.keys(window).forEach(
+        var dashboards = Dashboard.find({ owner: currentUser });
+        dashboards.forEach(
         	function(v) {
-        		if (w[v] instanceof Dashboard) {
-        			if (w[v].owner === me) {
-        				appendDashboard('dashboards', w[v]);
-        			}
-        		} else if (w[v] instanceof User) {
-        		    if (w[v] !== me) {
-        		        var li = document.createElement('li');
-                        li.innerHTML = '<a id="' + w[v].username + '-li" ' + 'href="#">' + w[v].username + '</a>';
-        		        document.getElementById('chg-lst').appendChild(li);
-        		        
-        		        document.getElementById(w[v].username + '-li').onclick = changeDashBoard;
-        		    }
-        		}
+        	    appendDashboard('dashboards', v);
         	}
+        );
+        
+        allUsers.forEach(
+            function(v) {
+                if (v !== currentUser) {
+                    var li = document.createElement('li');
+                    li.innerHTML = '<a id="' + v.username + '-li" ' + 'href="#">' + v.username + '</a>';
+        		    document.getElementById('chg-lst').appendChild(li);
+        		        
+        		    document.getElementById(v.username + '-li').onclick = changeDashBoard;
+        		}
+            }
         );
         
         document.getElementById('btn-create-dshb').onclick = createDashboard;
         
+        console.log(dataPool.showAll());
+        console.log(Dashboard.findLike({ name: 'all', base: 'overall' }));
+        
     // Adjust this time for your needs/requirements
-    }, 1500);
+    }, 1000);
 });

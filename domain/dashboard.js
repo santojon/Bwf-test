@@ -9,11 +9,40 @@ new Bwf('Dashboard: {\
                 tiles: list,\
                 base: string,\
                 extras: object\
-            ],\
-            get: -> {\
-            	tiles\
-            }\
+            ]\
         }');
+        
+
+
+
+// ------------------------------------------------
+// ORM related static functions
+// ------------------------------------------------
+
+Dashboard.add = function(obj) {
+	return dataPool.add(Dashboard, obj);
+};
+
+Dashboard.remove = function(obj) {
+    return dataPool.remove(Dashboard, obj);
+};
+
+Dashboard.find = function(opt) {
+    return dataPool.find(Dashboard, opt);
+};
+
+Dashboard.findLike = function(opt) {
+    return dataPool.findLike(Dashboard, opt);
+};
+
+Dashboard.findAll = function() {
+    return dataPool.findAll(Dashboard);
+};
+
+Dashboard.get = function(id) {
+    return dataPool.get(Dashboard, id);
+};
+
 
 
 
@@ -73,19 +102,21 @@ Dashboard.prototype.toHtml = function(cls) {
 
 
 
+
 // ----------------------------------------------------------
 // Create Dashboards
 // ----------------------------------------------------------
 
-var dashboard = new Dashboard({
+Dashboard.add(new Dashboard({
 	    				name: 'homeBase',
 	    				owner: fu,
 	    				tiles: ['lights', 'water', 'tv', 'pc', 'security', 'cameras']
-	    			});
+	    			})
+	    	  );
 //console.log(dashboard);
 //console.log(dashboard.get());
     			
-var dashboard2 = new Dashboard({
+Dashboard.add(new Dashboard({
 	    				name: 'home',
 	    				owner: me,
 	    				base: 'homeBase',
@@ -93,18 +124,20 @@ var dashboard2 = new Dashboard({
 	    				extras: {
 	    					tiles: ['games', 'stats']
 	    				}
-	    			});
+	    			})
+	    	  );
 	    			
-var dashboard3 = new Dashboard({
+Dashboard.add(new Dashboard({
 	    				name: 'work',
 	    				owner: me,
 	    				tiles: ['tasks', 'hours', 'coffee', 'slack', 'time tracking', 'issues'],
 	    				extras: {
 	    					tiles: ['news', 'forecast', 'traffic']
 	    				}
-	    			});
+	    			})
+	    	  );
 				 
-var dashboard4 = new Dashboard({
+Dashboard.add(new Dashboard({
 	    				name: 'overall',
 	    				owner: blah,
 	    				base: 'home',
@@ -113,10 +146,12 @@ var dashboard4 = new Dashboard({
 	    					base: 'work',
 	    					tiles: ['family', 'calendar', 'hollidays']
 	    				}
-	    			});
+	    			})
+	    	  );
 				
-var dashboard5 = new Dashboard({
+Dashboard.add(new Dashboard({
 	    				name: 'all',
 	    				owner: me,
 	    				base: 'overall'
-	    			});
+	    			})
+	    	  );
