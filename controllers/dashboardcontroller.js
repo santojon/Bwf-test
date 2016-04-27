@@ -61,6 +61,14 @@ function createDashboard() {
 	);
 }
 
+function removeDashboard(name) {
+    unAppendDashboard('dashboards',
+        Dashboard.remove(
+            Dashboard.findBy({ name: name })[0]
+        )
+    );
+}
+
 /**
  * Function responsible to add a HTML description of a dashboard to screen
  */
@@ -77,4 +85,11 @@ function appendDashboard(id, dashboard) {
     }
     // Remove 'div' element from target element
     target.removeChild(div);
+}
+
+function unAppendDashboard(id, dashboard) {
+    var div = document.getElementById(id);
+    var db = document.getElementById(dashboard.name);
+    
+    div.removeChild(db);
 }
