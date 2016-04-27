@@ -37,7 +37,7 @@ loadScript('loader.js', function() {
         
         document.getElementById('btn-create-dshb').onclick = createDashboard;
         
-        console.log(dataPool.showAll());
+        //console.log(dataPool.showAll());
         //console.log(Dashboard.findByILike({ name: 'all', base: 'overall' }));
         
     // Adjust this time for your needs/requirements
