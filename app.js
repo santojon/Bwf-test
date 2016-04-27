@@ -7,7 +7,7 @@ loadScript('loader.js', function() {
          * The app itself.
          */
          
-         var currentUser = User.find({ username: 'santojon' });
+         var currentUser = User.findBy({ username: 'santojon' })[0];
          var allUsers = User.findAll();
          
         // add my name to screen
@@ -16,7 +16,7 @@ loadScript('loader.js', function() {
         document.getElementById('title').appendChild(div);
         	
         // Add all defined dashboards for user 'me' to screen
-        var dashboards = Dashboard.find({ owner: currentUser });
+        var dashboards = Dashboard.findBy({ owner: currentUser });
         dashboards.forEach(
         	function(v) {
         	    appendDashboard('dashboards', v);
@@ -38,8 +38,8 @@ loadScript('loader.js', function() {
         document.getElementById('btn-create-dshb').onclick = createDashboard;
         
         console.log(dataPool.showAll());
-        console.log(Dashboard.findLike({ name: 'all', base: 'overall' }));
+        //console.log(Dashboard.findByILike({ name: 'all', base: 'overall' }));
         
     // Adjust this time for your needs/requirements
-    }, 1000);
+    }, 1500);
 });

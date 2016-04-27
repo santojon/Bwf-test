@@ -4,13 +4,15 @@ loadScripts(['models/Dashboard.bwf'], function() {
         loadScript('database.js', function() {
             loadDomain('user', function() {
                 loadDomain('dashboard', function() {
-                    loadControllers(['user', 'dashboard'], function() {
-                        loadStyle('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', function() {
-                            loadStyleAsset('style', function() {
-                                loadScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', function() {
-                                    
-                                    // show hidden things in screen
-                                    unhideAll();
+                    loadController('user', function() {
+                        loadController('dashboard', function() {
+                            loadStyle('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', function() {
+                                loadStyleAsset('style', function() {
+                                    loadScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', function() {
+                                        
+                                        // show hidden things in screen
+                                        unhideAll();
+                                    })
                                 })
                             })
                         })

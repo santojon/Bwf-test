@@ -7,30 +7,34 @@ function changeDashBoard() {
     document.getElementById('dashboards').innerHTML = '';
     document.getElementById('currentUser').innerHTML = username;
     
-    var w = window;
-    Object.keys(window).forEach(
+    var currentUser = User.findBy({ username: username })[0];
+    var allUsers = User.findAll();
+    
+    // Add all defined dashboards for user 'me' to screen
+    var dashboards = Dashboard.findBy({ owner: currentUser });
+    dashboards.forEach(
     	function(v) {
-    		if (w[v] instanceof Dashboard) {
-    			if (w[v].owner.username === username) {
-    				appendDashboard('dashboards', w[v]);
-    			}
-    		} else if (w[v] instanceof User) {
-    		    if (w[v].username !== username) {
-    		        var old = document.getElementById(username + '-li');
-                    if (old) {
-                        document.getElementById('chg-lst').removeChild(old.parentElement);
-                    }
-                    
-                    var n = document.getElementById(w[v].username + '-li');
-                    if (!n) {
-                        var li = document.createElement('li');
-                        li.innerHTML = '<a id="' + w[v].username + '-li" ' + 'href="#">' + w[v].username + '</a>';
-                        document.getElementById('chg-lst').appendChild(li);
-                    }		        
-                    document.getElementById(w[v].username + '-li').onclick = changeDashBoard;
-    		    }
-    		}
+    	    appendDashboard('dashboards', v);
     	}
+    );
+        
+    allUsers.forEach(
+        function(v) {
+            if (v !== currentUser) {
+                var old = document.getElementById(username + '-li');
+                if (old) {
+                    document.getElementById('chg-lst').removeChild(old.parentElement);
+                }
+                    
+                var n = document.getElementById(v.username + '-li');
+                if (!n) {
+                    var li = document.createElement('li');
+                    li.innerHTML = '<a id="' + v.username + '-li" ' + 'href="#">' + v.username + '</a>';
+                    document.getElementById('chg-lst').appendChild(li);
+                }		        
+                document.getElementById(v.username + '-li').onclick = changeDashBoard;
+    		}
+        }
     );
 }
 

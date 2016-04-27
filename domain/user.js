@@ -24,12 +24,12 @@ User.remove = function(obj) {
     return dataPool.remove(User, obj);
 };
 
-User.find = function(opt) {
-    return dataPool.find(User, opt);
+User.findBy = function(opt) {
+    return dataPool.findBy(User, opt);
 };
 
-User.findLike = function(opt) {
-    return dataPool.findLike(User, opt);
+User.findByILike = function(opt) {
+    return dataPool.findByILike(User, opt);
 };
 
 User.findAll = function() {

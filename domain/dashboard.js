@@ -27,12 +27,12 @@ Dashboard.remove = function(obj) {
     return dataPool.remove(Dashboard, obj);
 };
 
-Dashboard.find = function(opt) {
-    return dataPool.find(Dashboard, opt);
+Dashboard.findBy = function(opt) {
+    return dataPool.findBy(Dashboard, opt);
 };
 
-Dashboard.findLike = function(opt) {
-    return dataPool.findLike(Dashboard, opt);
+Dashboard.findByILike = function(opt) {
+    return dataPool.findByILike(Dashboard, opt);
 };
 
 Dashboard.findAll = function() {
@@ -109,7 +109,7 @@ Dashboard.prototype.toHtml = function(cls) {
 
 Dashboard.add(new Dashboard({
 	    				name: 'homeBase',
-	    				owner: fu,
+	    				owner: User.findBy({ username: 'santojon' })[0],
 	    				tiles: ['lights', 'water', 'tv', 'pc', 'security', 'cameras']
 	    			})
 	    	  );
@@ -118,7 +118,7 @@ Dashboard.add(new Dashboard({
     			
 Dashboard.add(new Dashboard({
 	    				name: 'home',
-	    				owner: me,
+	    				owner: User.findBy({ username: 'santojon' })[0],
 	    				base: 'homeBase',
 	    				tiles: ['locks', 'people'],
 	    				extras: {
@@ -129,7 +129,7 @@ Dashboard.add(new Dashboard({
 	    			
 Dashboard.add(new Dashboard({
 	    				name: 'work',
-	    				owner: me,
+	    				owner: User.findBy({ username: 'santojon' })[0],
 	    				tiles: ['tasks', 'hours', 'coffee', 'slack', 'time tracking', 'issues'],
 	    				extras: {
 	    					tiles: ['news', 'forecast', 'traffic']
@@ -139,7 +139,7 @@ Dashboard.add(new Dashboard({
 				 
 Dashboard.add(new Dashboard({
 	    				name: 'overall',
-	    				owner: blah,
+	    				owner: User.findBy({ username: 'blah' })[0],
 	    				base: 'home',
 	    				tiles: ['kids', 'wife', 'to-do lists'],
 	    				extras: {
@@ -151,7 +151,7 @@ Dashboard.add(new Dashboard({
 				
 Dashboard.add(new Dashboard({
 	    				name: 'all',
-	    				owner: me,
+	    				owner: User.findBy({ username: 'manolo' })[0],
 	    				base: 'overall'
 	    			})
 	    	  );
