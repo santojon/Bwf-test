@@ -2,16 +2,12 @@
 //readTextFile('model/Dashboard.bwf');
 //new Bwf( window['classesTmp']['Dashboard']);
 new Bwf('Dashboard: {\
-            required: [\
-                name: string,\
-                owner: object\
-            ],\
-            optional: [\
-                tiles: list,\
-                base: string,\
-                extras: object\
-            ]\
-        }');
+		    name: string,\
+		    owner: object,\
+		    tiles: list,\
+		    base: string,\
+		    extras: object\
+		}');
         
 
 

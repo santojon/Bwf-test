@@ -1,34 +1,64 @@
 Main: {
-    run: {
-        dashboard: {
-            name: 'homeBase',
-            tiles: ['lights', 'tv', 'pc', 'security']
-        }
-        dashboard: {
-            name: 'home',
-            base: 'homeBase',
-            extras: {
-                tiles: ['sys', 'lectric', 'water']
-            }
-        }
-        dashboard: {
-            name: 'work',
-            tiles: ['code', 'hours', 'avg', 'issues']
-        }
-        dashboard: {
-            name: 'overall',
-            base: 'work',
-            extras: {
-                base: 'home',
-                tiles: ['games']
-            },
-            tiles: ['trends', 'notes']
-        }
-        dashboard: {
-            name: 'all',
-            base: 'overall'
-        }
-        
-        dashboard['overall']
-    }
+	User: {
+		1: {
+			username: santojon
+		},
+		2: {
+			username: blah
+		},
+		3: {
+			username: manolo
+		},
+		id: 3
+	},
+	Dashboard: {
+		1: {
+			name: homeBase,
+			owner: {
+				username: santojon
+			},
+			tiles: [lights, water, tv, pc, security, cameras]
+		},
+		2: {
+			name: home,
+			owner: {
+				username: santojon
+			},
+			base: homeBase,
+			tiles: [locks, people],
+			extras: {
+				tiles: [games, stats]
+			}
+		},
+		3: {
+			name: work,
+			owner: {
+				username: santojon
+			},
+			tiles: [tasks, hours, coffee, slack, time tracking, issues],
+			extras: {
+				tiles: [news, forecast, traffic]
+			}
+		},
+		4: {
+			name: overall,
+			owner: {
+				username: blah
+			},
+			base: home,
+			tiles: [kids, wife, to - do lists],
+			extras: {
+				base: work,
+				tiles: [family, calendar, hollidays]
+			}
+		},
+		5: {
+			name: all,
+			owner: {
+				username: manolo
+			},
+			base: overall
+		},
+		id: 5
+	}
 }
