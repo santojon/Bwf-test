@@ -30,7 +30,7 @@ loadScript('loader.js', function() {
                     li.innerHTML = '<a id="' + v.username + '-li" ' + 'href="#">' + v.username + '</a>';
         		    document.getElementById('chg-lst').appendChild(li);
         		        
-        		    document.getElementById(v.username + '-li').onclick = changeDashBoard;
+        		    document.getElementById(v.username + '-li').onclick = changeDashboard;
         		}
             }
         );

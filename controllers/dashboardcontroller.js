@@ -2,7 +2,7 @@
  * Change the dashboards to show.
  * This remove previous dashboards from screen.
  */
-function changeDashBoard() {
+function changeDashboard() {
     var username = this.innerHTML.split(/-li/)[0];
     document.getElementById('dashboards').innerHTML = '';
     document.getElementById('currentUser').innerHTML = username;
@@ -32,7 +32,7 @@ function changeDashBoard() {
                     li.innerHTML = '<a id="' + v.username + '-li" ' + 'href="#">' + v.username + '</a>';
                     document.getElementById('chg-lst').appendChild(li);
                 }		        
-                document.getElementById(v.username + '-li').onclick = changeDashBoard;
+                document.getElementById(v.username + '-li').onclick = changeDashboard;
     		}
         }
     );
@@ -61,6 +61,10 @@ function createDashboard() {
 	);
 }
 
+/**
+ * Remove dashboard from screen (and database)
+ * @param name: the name of the dashboard to remove
+ */
 function removeDashboard(name) {
     unAppendDashboard('dashboards',
         Dashboard.remove(
@@ -71,6 +75,8 @@ function removeDashboard(name) {
 
 /**
  * Function responsible to add a HTML description of a dashboard to screen
+ * @param id: the id of the element of the screen to append dashboard
+ * @param dashboard: the dashboard to append
  */
 function appendDashboard(id, dashboard) {
 	var div, target = document.getElementById(id);
@@ -87,6 +93,11 @@ function appendDashboard(id, dashboard) {
     target.removeChild(div);
 }
 
+/**
+ * Function responsible to remove the HTML description of a dashboard from screen
+ * @param id: the id of the element of the screen to remove dashboard
+ * @param dashboard: the dashboard to remove
+ */
 function unAppendDashboard(id, dashboard) {
     var div = document.getElementById(id);
     var db = document.getElementById(dashboard.name);
