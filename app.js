@@ -37,7 +37,7 @@ loadScript('loader.js', function() {
         
         document.getElementById('btn-create-dshb').onclick = createDashboard;
         
-        //console.log(dataPool.exportAs('bwf'));
+        console.log(dataPool.exportAs('bwf'));
         //console.log(dataPool.exportAs('javascript'));
         //console.log(dataPool.exportAs('json'));
         

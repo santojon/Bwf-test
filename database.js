@@ -1,2 +1,2 @@
 // Inject 'database' access
-var dataPool = new DataPool();
+var dataPool = new Bhr();
