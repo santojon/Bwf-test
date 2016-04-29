@@ -1,5 +1,5 @@
 // Class definition
-new Bwf('User: {\
+classLoader.create('User: {\
             username: string,\
             password: string\
         }');

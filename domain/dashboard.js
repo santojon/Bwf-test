@@ -1,14 +1,13 @@
 // Create new class from string definition
 //readTextFile('model/Dashboard.bwf');
 //new Bwf( window['classesTmp']['Dashboard']);
-new Bwf('Dashboard: {\
+classLoader.create('Dashboard: {\
 		    name: string,\
 		    owner: object,\
 		    tiles: list,\
 		    base: string,\
 		    extras: object\
-		}');
-        
+        }');
 
 
 
@@ -38,6 +37,14 @@ Dashboard.findAll = function() {
 
 Dashboard.get = function(id) {
     return dataPool.get(Dashboard, id);
+};
+
+Dashboard.prototype.save = function() {
+	return Dashboard.add(this);
+};
+
+Dashboard.prototype.delete = function() {
+	return Dashboard.remove(this);
 };
 
 
@@ -107,51 +114,44 @@ Dashboard.prototype.toHtml = function(cls) {
 // Create Dashboards
 // ----------------------------------------------------------
 
-Dashboard.add(new Dashboard({
-	    				name: 'homeBase',
-	    				owner: User.findBy({ username: 'santojon' })[0],
-	    				tiles: ['lights', 'water', 'tv', 'pc', 'security', 'cameras']
-	    			})
-	    	  );
-//console.log(dashboard);
-//console.log(dashboard.get());
+new Dashboard({
+		name: 'homeBase',
+	   	owner: User.findBy({ username: 'santojon' })[0],
+		tiles: ['lights', 'water', 'tv', 'pc', 'security', 'cameras']
+	}).save();
     			
-Dashboard.add(new Dashboard({
-	    				name: 'home',
-	    				owner: User.findBy({ username: 'santojon' })[0],
-	    				base: 'homeBase',
-	    				tiles: ['locks', 'people'],
-	    				extras: {
-	    					tiles: ['games', 'stats']
-	    				}
-	    			})
-	    	  );
-	    			
-Dashboard.add(new Dashboard({
-	    				name: 'work',
-	    				owner: User.findBy({ username: 'santojon' })[0],
-	    				tiles: ['tasks', 'hours', 'coffee', 'slack', 'time tracking', 'issues'],
-	    				extras: {
-	    					tiles: ['news', 'forecast', 'traffic']
-	    				}
-	    			})
-	    	  );
+new Dashboard({
+		name: 'home',
+		owner: User.findBy({ username: 'santojon' })[0],
+		base: 'homeBase',
+		tiles: ['locks', 'people'],
+		extras: {
+			tiles: ['games', 'stats']
+		}
+	}).save();
+    			
+new Dashboard({
+		name: 'work',
+		owner: User.findBy({ username: 'santojon' })[0],
+		tiles: ['tasks', 'hours', 'coffee', 'slack', 'time tracking', 'issues'],
+		extras: {
+			tiles: ['news', 'forecast', 'traffic']
+		}
+	}).save();
 				 
-Dashboard.add(new Dashboard({
-	    				name: 'overall',
-	    				owner: User.findBy({ username: 'blah' })[0],
-	    				base: 'home',
-	    				tiles: ['kids', 'wife', 'to-do lists'],
-	    				extras: {
-	    					base: 'work',
-	    					tiles: ['family', 'calendar', 'hollidays']
-	    				}
-	    			})
-	    	  );
+new Dashboard({
+		name: 'overall',
+		owner: User.findBy({ username: 'blah' })[0],
+		base: 'home',
+		tiles: ['kids', 'wife', 'to-do lists'],
+		extras: {
+			base: 'work',
+			tiles: ['family', 'calendar', 'hollidays']
+		}
+	}).save();
 				
-Dashboard.add(new Dashboard({
-	    				name: 'all',
-	    				owner: User.findBy({ username: 'manolo' })[0],
-	    				base: 'overall'
-	    			})
-	    	  );
+new Dashboard({
+		name: 'all',
+		owner: User.findBy({ username: 'manolo' })[0],
+		base: 'overall'
+	}).save();

@@ -1,2 +1,5 @@
+// Inject 'classLoader'
+var classLoader = new Bwf();
+
 // Inject 'database' access
-var dataPool = new Bhr();
+var dataPool = new Bhdr();

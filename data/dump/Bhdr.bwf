@@ -1,4 +1,4 @@
-Main: {
+Bhdr: {
 	User: {
 		1: {
 			username: santojon
@@ -17,7 +17,7 @@ Main: {
 			owner: {
 				username: santojon
 			},
-			tiles: [lights, water, tv, pc, security, cameras]
+			tiles: [ lights, water, tv, pc, security, cameras ]
 		},
 		2: {
 			name: home,
@@ -25,9 +25,9 @@ Main: {
 				username: santojon
 			},
 			base: homeBase,
-			tiles: [locks, people],
+			tiles: [ locks, people ],
 			extras: {
-				tiles: [games, stats]
+				tiles: [ games, stats ]
 			}
 		},
 		3: {
@@ -35,9 +35,9 @@ Main: {
 			owner: {
 				username: santojon
 			},
-			tiles: [tasks, hours, coffee, slack, time tracking, issues],
+			tiles: [ tasks, hours, coffee, slack, time tracking, issues ],
 			extras: {
-				tiles: [news, forecast, traffic]
+				tiles: [ news, forecast, traffic ]
 			}
 		},
 		4: {
@@ -46,10 +46,10 @@ Main: {
 				username: blah
 			},
 			base: home,
-			tiles: [kids, wife, to - do lists],
+			tiles: [ kids, wife, to - do lists ],
 			extras: {
 				base: work,
-				tiles: [family, calendar, hollidays]
+				tiles: [ family, calendar, hollidays ]
 			}
 		},
 		5: {

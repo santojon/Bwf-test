@@ -25,4 +25,4 @@ Here we have an structure with ```base.js``` and ```app.js```, to load all app p
 - Bwf and 'base' as lib
 - Controllers using Bwf
 - App auto loading ***styles****(css)* and ***controllers***
-- 'Database' like functionalities (with 'ORM') using ***Bhr (Brynhildr)*** as datapool
+- 'Database' like functionalities (with 'ORM') using ***Bhdr (Brynhildr)*** as datapool
