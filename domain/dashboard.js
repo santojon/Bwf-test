@@ -1,6 +1,4 @@
-// Create new class from string definition
-//readTextFile('model/Dashboard.bwf');
-//new Bwf( window['classesTmp']['Dashboard']);
+// Create new class from Bwf definition
 classLoader.create('Dashboard: {\
 		    name: string,\
 		    owner: object,\
@@ -8,45 +6,9 @@ classLoader.create('Dashboard: {\
 		    base: string,\
 		    extras: object\
         }');
-
-
-
-// ------------------------------------------------
-// ORM related static functions
-// ------------------------------------------------
-
-Dashboard.add = function(obj) {
-	return dataPool.add(Dashboard, obj);
-};
-
-Dashboard.remove = function(obj) {
-    return dataPool.remove(Dashboard, obj);
-};
-
-Dashboard.findBy = function(opt) {
-    return dataPool.findBy(Dashboard, opt);
-};
-
-Dashboard.findByILike = function(opt) {
-    return dataPool.findByILike(Dashboard, opt);
-};
-
-Dashboard.findAll = function() {
-    return dataPool.findAll(Dashboard);
-};
-
-Dashboard.get = function(id) {
-    return dataPool.get(Dashboard, id);
-};
-
-Dashboard.prototype.save = function() {
-	return Dashboard.add(this);
-};
-
-Dashboard.prototype.delete = function() {
-	return Dashboard.remove(this);
-};
-
+        
+// Map class to 'database'
+dataPool.map(Dashboard);
 
 
 
