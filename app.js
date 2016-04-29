@@ -44,11 +44,11 @@ loadScript('loader.js', function() {
                 			name: asd,\
                 			base: asd asd,\
                 			extras: {\
-                			    tiles: [ nothing, blah, kkk, ks, kls ],\
+                			    tiles: [ nothing to lose, blah, kkk, _ks, kls ],\
                 			    base: basic\
                             },\
                             owner: {\
-                                username: santojon\
+                                username: santojon-dev\
                             }\
                 		}')
         );
