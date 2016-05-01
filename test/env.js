@@ -1,6 +1,7 @@
 // create test class and map it to db
 classLoader.create('Test: {\
                         name: string,\
+                        relatedTo: string,\
                         result: boolean,\
                         trace: string\
                     }');
@@ -34,7 +35,8 @@ Test.prototype.toHtml = function(cls) {
 	    } else {
 	        htmlStr = '<div id="' + db['name'] + '" class="panel panel-danger ' + (cls || '') + '">';
 	    }
-	    htmlStr = htmlStr + '<div class="panel-heading">' + db['name'] +
+	    htmlStr = htmlStr + '<div class="panel-heading">' + db['relatedTo'] +
+	                ' <small><span class="glyphicon glyphicon-triangle-right"></span></small> ' + db['name'] +
 	                            '<div class="pull-right">' +
             	    			    result +
 	                            '</div>' +
@@ -92,4 +94,35 @@ function appendTest(id, test) {
     }
     // Remove 'div' element from target element
     target.removeChild(div);
+}
+
+/**
+ * Show test set progressBar
+ * @param tset: the set to show progress
+ */
+function showProgress(tset) {
+    var sum = tset.success + tset.failure;
+    var sucP = (tset.success * 100 / sum);
+    
+    // 100% error!!!
+    if (sucP === 0) {
+        var err = document.getElementById('error-progress');
+        err.style = 'width: ' + (100 - sucP) + '% !important;';
+        err.textContent = 'Failure: ' + (100 - Math.round(sucP)).toString() + '%';
+    }
+    // 100% success!!!
+    else if (sucP === 1) {
+        var suc = document.getElementById('success-progress');
+        suc.style = 'width: ' + sucP + '% !important;';
+        suc.textContent = 'Success: ' + Math.round(sucP).toString() + '%';
+    } else {
+        var suc = document.getElementById('success-progress');
+        var err = document.getElementById('error-progress');
+        
+        suc.style = 'width: ' + sucP + '% !important;';
+        err.style = 'width: ' + (100 - sucP) + '% !important;';
+        
+        suc.textContent = 'Success: ' + Math.round(sucP).toString() + '%';
+        err.textContent = 'Failure: ' + (100 - Math.round(sucP)).toString() + '%';
+    }
 }

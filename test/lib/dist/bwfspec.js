@@ -17,6 +17,7 @@ var bwfSpec = {
         testSimpleInstance: function() {
             // create test
             var t = new Test({
+                relatedTo: relatedTo,
                 name: 'testSimpleInstance',
                 result: false
             });
@@ -58,6 +59,7 @@ var bwfSpec = {
         testSimpleCreateSuccess: function() {
             // create test
             var t = new Test({
+                relatedTo: relatedTo,
                 name: 'testSimpleCreateSuccess',
                 result: false
             });
@@ -85,6 +87,7 @@ var bwfSpec = {
         testSimpleCreateFailure: function() {
             // create test
             var t = new Test({
+                relatedTo: relatedTo,
                 name: 'testSimpleCreateFailure',
                 result: true
             });
@@ -112,6 +115,7 @@ var bwfSpec = {
         testComplexCreateSuccess: function() {
             // create test
             var t = new Test({
+                relatedTo: relatedTo,
                 name: 'testComplexCreateSuccess',
                 result: false
             });
@@ -152,6 +156,7 @@ var bwfSpec = {
         testComplexCreateFailure: function() {
             // create test
             var t = new Test({
+                relatedTo: relatedTo,
                 name: 'testComplexCreateFailure',
                 result: true
             });
@@ -192,6 +197,7 @@ var bwfSpec = {
         testSimpleValuateSuccess: function() {
             // create test
             var t = new Test({
+                relatedTo: relatedTo,
                 name: 'testSimpleValuateSuccess',
                 result: false
             });
@@ -221,6 +227,7 @@ var bwfSpec = {
         testSimpleValuateFailure: function() {
             // create test
             var t = new Test({
+                relatedTo: relatedTo,
                 name: 'testSimpleValuateFailure',
                 result: true
             });
@@ -250,6 +257,7 @@ var bwfSpec = {
         testComplexValuateSuccess: function() {
             // create test
             var t = new Test({
+                relatedTo: relatedTo,
                 name: 'testComplexValuateSuccess',
                 result: false
             });
@@ -289,6 +297,7 @@ var bwfSpec = {
         testComplexValuateFailure: function() {
             // create test
             var t = new Test({
+                relatedTo: relatedTo,
                 name: 'testComplexValuateFailure',
                 result: true
             });
@@ -352,6 +361,13 @@ var bwfSpec = {
         );
         
         testSet.save();
+        
+        // cleanup
+        Test.findBy({ relatedTo: relatedTo }).forEach(
+            function(test) {
+                test.delete();
+            }
+        );
         
         return TestSet.findBy({ relatedTo: relatedTo });
     }
