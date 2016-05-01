@@ -77,6 +77,21 @@ Test.prototype.toHtml = function(cls) {
 
 
 /**
+ * Used to append progress bar to screen in tests
+ * @param id: the id of the div to use
+ * @param divId: the id of div to append
+ * @param cls: css class of the div
+ */
+function appendDiv(id, divId, cls) {
+	var div, target = document.getElementById(id);
+	div = document.createElement('div');
+	div.id = divId;
+	div.className = cls;
+	
+	target.appendChild(div);
+}
+
+/**
  * Function responsible to add a HTML description of a dashboard to screen
  * @param id: the id of the element of the screen to append dashboard
  * @param dashboard: the dashboard to append
@@ -97,6 +112,30 @@ function appendTest(id, test) {
 }
 
 /**
+ * Used to append progress bar to screen in tests
+ * @param id: the id of the div to use
+ * @param tset: the set to append
+ */
+function appendSet(id, tset) {
+	var div, target = document.getElementById(id);
+	div = document.createElement('div');
+	
+	div.innerHTML = '<h4>' + tset.relatedTo + '</h4><div class="progress">\
+			  <div id="success-progress' + tset.relatedTo + '" class="progress-bar progress-bar-success"></div>\
+			  <div id="error-progress' + tset.relatedTo + '" class="progress-bar progress-bar-danger"></div>\
+			</div>';
+	
+	target.appendChild(div);
+	
+	while (div.firstChild) {
+        // Also removes child nodes from 'div'
+        target.insertBefore(div.firstChild, div);
+    }
+    // Remove 'div' element from target element
+    target.removeChild(div);
+}
+
+/**
  * Show test set progressBar
  * @param tset: the set to show progress
  */
@@ -106,18 +145,18 @@ function showProgress(tset) {
     
     // 100% error!!!
     if (sucP === 0) {
-        var err = document.getElementById('error-progress');
+        var err = document.getElementById('error-progress' + tset.relatedTo);
         err.style = 'width: ' + (100 - sucP) + '% !important;';
         err.textContent = 'Failure: ' + (100 - Math.round(sucP)).toString() + '%';
     }
     // 100% success!!!
     else if (sucP === 1) {
-        var suc = document.getElementById('success-progress');
+        var suc = document.getElementById('success-progress' + tset.relatedTo);
         suc.style = 'width: ' + sucP + '% !important;';
         suc.textContent = 'Success: ' + Math.round(sucP).toString() + '%';
     } else {
-        var suc = document.getElementById('success-progress');
-        var err = document.getElementById('error-progress');
+        var suc = document.getElementById('success-progress' + tset.relatedTo);
+        var err = document.getElementById('error-progress' + tset.relatedTo);
         
         suc.style = 'width: ' + sucP + '% !important;';
         err.style = 'width: ' + (100 - sucP) + '% !important;';

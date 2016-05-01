@@ -369,6 +369,6 @@ var bwfSpec = {
             }
         );
         
-        return TestSet.findBy({ relatedTo: relatedTo });
+        return TestSet.findBy({ relatedTo: relatedTo })[0];
     }
 };

@@ -6,13 +6,15 @@ loadScript('loader.js', function() {
         /**
          * The app itself.
          */
-        bwfSpec.run().forEach(
+        [bwfSpec.run()].forEach(
             function(tset) {
+                appendDiv('tests-results', tset.relatedTo, 'set');
+                appendSet(tset.relatedTo, tset);
                 showProgress(tset);
                 
                 tset.tests.forEach(
                     function(result) {
-                        appendTest('tests-results', new Test(result));
+                        appendTest(tset.relatedTo, new Test(result));
                     }
                 );
             }

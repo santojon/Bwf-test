@@ -1,7 +1,7 @@
 // Load all needed data here. Chain order is very important!
 loadScripts(['../src/models/User.bwf', '../src/models/Dashboard.bwf'], function() {
     loadScripts(['../src/lib/utils.js', '../src/lib/dist/bhdr.js', 'https://code.jquery.com/jquery-2.2.3.min.js', '../src/lib/dist/bwf.js'], function() {
-        loadScript('database.js', function() {
+        loadScript('conf.js', function() {
             loadScripts(['../src/domain/user.js', '../src/controllers/usercontroller.js'], function() {
                 loadScripts(['../src/domain/dashboard.js', '../src/controllers/dashboardcontroller.js'], function() {
                     loadStyles(['https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', '../src/assets/css/style.css',

@@ -1,7 +1,7 @@
 // Load all needed data here. Chain order is very important!
 loadScripts(['models/User.bwf', 'models/Dashboard.bwf'], function() {
     loadScripts(['lib/utils.js', 'lib/dist/bhdr.js', 'https://code.jquery.com/jquery-2.2.3.min.js', 'lib/dist/bwf.js'], function() {
-        loadScript('database.js', function() {
+        loadScript('conf.js', function() {
             loadDomain('user', function() {
                 loadDomain('dashboard', function() {
                     loadController('user', function() {
