@@ -6,7 +6,8 @@ loadScripts(['models/User.bwf', 'models/Dashboard.bwf'], function() {
                 loadDomain('dashboard', function() {
                     loadController('user', function() {
                         loadController('dashboard', function() {
-                            loadStyle('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', function() {
+                            loadStyles(['https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
+                                        'https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'], function() {
                                 loadStyleAsset('style', function() {
                                     loadScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', function() {
                                         

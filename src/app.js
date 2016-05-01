@@ -59,6 +59,8 @@ loadScript('loader.js', function() {
                 		}')
         );
         
+        //console.log(getFiles('controllers'));
+        
         //console.log(dataPool.exportAs('javascript'));
         //console.log(dataPool.exportAs('json'));
         

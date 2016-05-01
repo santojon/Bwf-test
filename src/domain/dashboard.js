@@ -17,7 +17,7 @@ dataPool.map(Dashboard);
 // -----------------------------------------------
 
 /**
- * Class responsible to create HTML text for a dashboard
+ * Function responsible to create HTML text for a dashboard
  */
 Dashboard.prototype.toHtml = function(cls) {
 	var db = this;

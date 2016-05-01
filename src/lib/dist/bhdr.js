@@ -152,27 +152,27 @@ function Bhdr(options) {
          */
         map: function(klass) {
             klass.add = function(obj) {
-            	return dataPool.add(klass, obj);
+            	return pool.prototype.add(klass, obj);
             };
             
             klass.remove = function(obj) {
-                return dataPool.remove(klass, obj);
+                return pool.prototype.remove(klass, obj);
             };
             
             klass.findBy = function(opt) {
-                return dataPool.findBy(klass, opt);
+                return pool.prototype.findBy(klass, opt);
             };
             
             klass.findByILike = function(opt) {
-                return dataPool.findByILike(klass, opt);
+                return pool.prototype.findByILike(klass, opt);
             };
             
             klass.findAll = function() {
-                return dataPool.findAll(klass);
+                return pool.prototype.findAll(klass);
             };
             
             klass.get = function(id) {
-                return dataPool.get(klass, id);
+                return pool.prototype.get(klass, id);
             };
             
             klass.prototype.save = function() {
@@ -188,7 +188,7 @@ function Bhdr(options) {
         /**
          * Function used get the 'entity' with the given class and id
          * @param klass: the class of the object to get
-         * @param id: the id of the object in datapool
+         * @param id: the id of the object in Bhdr
          */
         get: function(klass, id) {
             var cname = klass.prototype.constructor.name;

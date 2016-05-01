@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Dashboards</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="lib/base.js"></script>
+		<script type="text/javascript" src="app.js"></script>
+		
+		<div class="container">
+			<h1 id="title" hidden="hidden">
+				<div class="btn-group pull-left mRight10">
+					<button id="btn-chg-usr" class="btn btn-default dropdown-toggle"
+								type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Change user <span class="caret"></span>
+					</button>
+					<ul id="chg-lst" class="dropdown-menu"></ul>
+				</div>
+				Dashboards
+				<button id="btn-create-dshb" class="btn btn-default pull-right">
+					New dashboard
+				</button>
+			</h1>
+			<div id="dashboards"></div>
+		</div>
+	</body>
+</html>

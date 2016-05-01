@@ -51,6 +51,12 @@ function Bwf(elem, options) {
 	        return this;
 	    },
 	    /**
+	     * Function to validate instance of Beowulf
+	     */
+	    instanceof: function(klass) {
+	        return (klass.prototype.constructor.name === 'Bwf');
+	    },
+	    /**
 	     * Creates a class for the given string
 	     * @param el: the Beowulf class notation, as string
 	     */
