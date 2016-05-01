@@ -48,7 +48,7 @@ Test.prototype.toHtml = function(cls) {
 		function(key) {
 			switch (typeof db[key]) {
 				case 'string':
-				    if (key !== 'name') {
+				    if ((key !== 'name') && (key !== 'relatedTo')) {
 				        htmlStr = htmlStr + '<p>' 
     						+ key + ': <code class="' + divClass + '">' + db[key] + '</code></p>';
 				    }
