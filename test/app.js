@@ -6,15 +6,17 @@ loadScript('loader.js', function() {
         /**
          * The app itself.
          */
-        [bwfSpec.run()].forEach(
+         
+        var res = new Slpnr({ sets: specs }).run();
+        Object.keys(res).forEach(
             function(tset) {
-                appendDiv('tests-results', tset.relatedTo, 'set');
-                appendSet(tset.relatedTo, tset);
-                showProgress(tset);
+                appendDiv('tests-results', tset, 'set');
+                appendSet(res[tset].relatedTo, res[tset]);
+                showProgress(res[tset]);
                 
-                tset.tests.forEach(
+                res[tset].tests.forEach(
                     function(result) {
-                        appendTest(tset.relatedTo, new Test(result));
+                        appendTest(tset, new Test(result));
                     }
                 );
             }

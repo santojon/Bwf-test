@@ -18,11 +18,71 @@ function Bhdr(options) {
             return this;
         },
         /**
+         * Create a table if it not exists
+         * @param klass: the class of the objects of the table
+         */
+        createTable: function(klass) {
+            var cname = klass.prototype.constructor.name;
+            if (!data[cname]) {
+                data[cname] = { id: baseId };
+            }
+            
+            return data[cname];
+        },
+        /**
+         * Drop a table if it not exists
+         * @param klass: the class of the objects of the table
+         */
+        dropTable: function(klass) {
+            var cname = klass.prototype.constructor.name;
+            if (data[cname]) {
+                delete data[cname];
+            }
+            
+            return null;
+        },
+        /**
+         * Alter a table if it exists
+         * @param klass: the class of the objects of the table
+         */
+        alterTable: function(klass, opt) {
+            var cname = klass.prototype.constructor.name;
+            if (data[cname]) {
+                Object.keys(opt).forEach(
+                    function(key) {
+                        if (key === 'tableName') {
+                            data[opt['tableName']] = data[cname];
+                            delete data[cname];
+                        } else {
+                            if (data[cname]) {
+                                Object.keys(data[cname]).forEach(
+                                    function(k) {
+                                        Object.keys(data[cname][k]).forEach(
+                                            function(kk) {
+                                                if (kk === key) {
+                                                    data[cname][k][opt[key]] = data[cname][k][kk];
+                                                    delete data[cname][k][kk];
+                                                }
+                                            }
+                                        );
+                                    }
+                                );
+                            }
+                        }
+                    }
+                );
+                
+                return data[cname];
+            }
+            
+            return null;
+        },
+        /**
          * Function used to add new instances into 'database'
          * @param klass: the class of the object to add
          * @param obj: the object to add into 'database'
          */
-        add: function(klass, obj) {
+        insert: function(klass, obj) {
             var cname = klass.prototype.constructor.name;
             if (!data[cname]) {
                 data[cname] = {};
@@ -39,7 +99,7 @@ function Bhdr(options) {
          * @param klass: the class of the object to remove
          * @param obj: the object to remove from 'database'
          */
-        remove: function(klass, obj) {
+        delete: function(klass, obj) {
             var cname = klass.prototype.constructor.name;
             
             if (data[cname]) {
@@ -84,7 +144,78 @@ function Bhdr(options) {
             return result.unique();
         },
         /**
-         * Function used to find instances in 'database'
+         * Function used to find instances in 'database' with exact values (case insensitive)
+         * @param klass: the class of the object to find
+         * @param opt: the options used to find
+         */
+        findByI: function(klass, opt) {
+            var cname = klass.prototype.constructor.name;
+            var result = [];
+            
+            if (data[cname]) {
+                Object.keys(opt).forEach(
+                    function(key) {
+                        Object.keys(data[cname]).forEach(
+                            function(k) {
+                                if (data[cname][k][key] &&
+                                        (data[cname][k][key]
+                                            .toLowerCase() === opt[key].toLowerCase())) {
+                                    
+                                    result.push(data[cname][k]);
+                                }
+                            }
+                        );
+                    }
+                );
+            }
+            
+            return result.unique();
+        },
+        /**
+         * Function used to find instances in 'database' with similar values
+         * @param klass: the class of the object to find
+         * @param opt: the options used to find
+         */
+        findByLike: function(klass, opt) {
+            var cname = klass.prototype.constructor.name;
+            var partial = [];
+            var aux = [];
+            
+            var result = [];
+            
+            Object.keys(data[cname]).forEach(
+                function(k) {
+                    if (k !== 'id') {
+                        partial.push(data[cname][k]);
+                    }
+                }
+            );
+            
+            if (data[cname]) {
+                Object.keys(opt).forEach(
+                    function(key) {
+                        partial.forEach(
+                            function(k) {
+                                if (k[key]) {
+                                    if (k[key].toString()
+                                            .indexOf(opt[key].toString()) !== -1) {
+                                        
+                                        aux.push(k);
+                                    }
+                                }
+                            }
+                        );
+                        partial = aux;
+                        aux = [];
+                    }
+                );
+                result = partial;
+            }
+            
+            return result.unique();
+        },
+        /**
+         * Function used to find instances in 'database' with similar values (case insensitive)
          * @param klass: the class of the object to find
          * @param opt: the options used to find
          */
@@ -152,11 +283,11 @@ function Bhdr(options) {
          */
         map: function(klass) {
             klass.add = function(obj) {
-            	return pool.prototype.add(klass, obj);
+            	return pool.prototype.insert(klass, obj);
             };
             
             klass.remove = function(obj) {
-                return pool.prototype.remove(klass, obj);
+                return pool.prototype.delete(klass, obj);
             };
             
             klass.findBy = function(opt) {
@@ -181,6 +312,14 @@ function Bhdr(options) {
             
             klass.prototype.delete = function() {
             	return klass.remove(this);
+            };
+            
+            klass.createTable = function() {
+            	return pool.prototype.createTable(klass);
+            };
+            
+            klass.dropTable = function() {
+            	return pool.prototype.dropTable(klass);
             };
             
             return klass;
@@ -224,9 +363,6 @@ function Bhdr(options) {
                                                         .split(/  /).join(' ').trim();
                     result = 'Bhdr: ' + main;
                     break;
-                default:
-                    result = JSON.stringify(data);
-                    break;
             }
             
             return result;
@@ -256,15 +392,67 @@ function Bhdr(options) {
     return pool.prototype.init();
 }
 
+/**
+ * Array extra functions (for Bhdr needs)
+ */
 (function() {
-    Array.prototype.remove = function(val) {
+    /**
+     * Remove a value from array (all occurences)
+     * @param val: the value to remove
+     */
+    Array.prototype.remove = function (val) {
         var i = this.indexOf(val);
         return (i > -1) ? this.splice(i, 1) : [];
     };
     
+    /**
+     * Remove all duplicated values from array
+     */
     Array.prototype.unique = function () {
 	    return this.sort().filter(function(item, pos, array) {
 	        return !pos || item != array[pos - 1];
-	    })
+	    });
+	};
+	
+	/**
+     * Alias for 'lenght'
+     */
+	Array.prototype.count = function () {
+	    return this.length || 0;
+	};
+	
+	/**
+     * Order an array of objects by fields
+     * @param field: the field to order by
+     * @param reverse: true to order descending
+     * @param rfunc: function to restrict compairson scope (if needed)
+     */
+	Array.prototype.orderBy = function (field, reverse, rfunc) {
+	    var key = rfunc ? 
+           function(x) { return rfunc(x[field]); } : 
+           function(x) { return x[field]; };
+        
+        reverse = !reverse ? 1 : -1;
+	    
+	    return this.sort(function (a, b) {
+	        return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
+        });
+	};
+	
+	/**
+	 * Calculate average of numeric fields
+	 * @param field: the field to calculate avg
+	 */
+	Array.prototype.avg = function (field) {
+	    if (this.count() > 0) {
+	        var r = [];
+	        this.forEach(function(k) {
+	            r.push(k[field]);
+	        });
+	        
+	        return r.reduce(function(a, b) { return a + b; }) / this.count();
+	    } else {
+	        return 0;
+	    }
 	};
 })();

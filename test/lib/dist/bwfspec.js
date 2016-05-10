@@ -1,10 +1,25 @@
-// relatedTo
-var relatedTo = 'Beowulf';
-
 /**
  * Tests for Beowulf lib
  */
 var bwfSpec = {
+    
+    relatedTo: 'Beowulf',
+    
+    /**
+     * Responsible to create necessary resources before run the tests
+     */
+    setUp: function() {
+        
+    },
+    
+    /**
+     * Responsible to do a cleanup run  after tests
+     */
+    tearDown: function() {
+        // cleanup
+        Test.dropTable();
+        TestSet.dropTable();
+    },
     
     /**
      * All tests f this set
@@ -17,7 +32,7 @@ var bwfSpec = {
         testSimpleInstance: function() {
             // create test
             var t = new Test({
-                relatedTo: relatedTo,
+                relatedTo: bwfSpec.relatedTo,
                 name: 'testSimpleInstance',
                 result: false
             });
@@ -59,7 +74,7 @@ var bwfSpec = {
         testSimpleCreateSuccess: function() {
             // create test
             var t = new Test({
-                relatedTo: relatedTo,
+                relatedTo: bwfSpec.relatedTo,
                 name: 'testSimpleCreateSuccess',
                 result: false
             });
@@ -87,7 +102,7 @@ var bwfSpec = {
         testSimpleCreateFailure: function() {
             // create test
             var t = new Test({
-                relatedTo: relatedTo,
+                relatedTo: bwfSpec.relatedTo,
                 name: 'testSimpleCreateFailure',
                 result: true
             });
@@ -115,7 +130,7 @@ var bwfSpec = {
         testComplexCreateSuccess: function() {
             // create test
             var t = new Test({
-                relatedTo: relatedTo,
+                relatedTo: bwfSpec.relatedTo,
                 name: 'testComplexCreateSuccess',
                 result: false
             });
@@ -156,7 +171,7 @@ var bwfSpec = {
         testComplexCreateFailure: function() {
             // create test
             var t = new Test({
-                relatedTo: relatedTo,
+                relatedTo: bwfSpec.relatedTo,
                 name: 'testComplexCreateFailure',
                 result: true
             });
@@ -197,7 +212,7 @@ var bwfSpec = {
         testSimpleValuateSuccess: function() {
             // create test
             var t = new Test({
-                relatedTo: relatedTo,
+                relatedTo: bwfSpec.relatedTo,
                 name: 'testSimpleValuateSuccess',
                 result: false
             });
@@ -227,7 +242,7 @@ var bwfSpec = {
         testSimpleValuateFailure: function() {
             // create test
             var t = new Test({
-                relatedTo: relatedTo,
+                relatedTo: bwfSpec.relatedTo,
                 name: 'testSimpleValuateFailure',
                 result: true
             });
@@ -257,7 +272,7 @@ var bwfSpec = {
         testComplexValuateSuccess: function() {
             // create test
             var t = new Test({
-                relatedTo: relatedTo,
+                relatedTo: bwfSpec.relatedTo,
                 name: 'testComplexValuateSuccess',
                 result: false
             });
@@ -297,7 +312,7 @@ var bwfSpec = {
         testComplexValuateFailure: function() {
             // create test
             var t = new Test({
-                relatedTo: relatedTo,
+                relatedTo: bwfSpec.relatedTo,
                 name: 'testComplexValuateFailure',
                 result: true
             });
@@ -330,45 +345,5 @@ var bwfSpec = {
             t.save();
             return t.result;
         }
-    },
-    
-    /**
-     * Run all tests in this set
-     */
-    run: function() {
-        var testSet = new TestSet({
-            relatedTo: relatedTo,
-            date: new Date().toUTCString()
-        });
-        
-        var allTests = this.tests;
-        Object.keys(allTests).forEach(
-            function(test) {
-                var res = allTests[test]();
-                
-                var tes = Test.findBy({ name: test })[0];
-                
-                if (tes) {
-                    testSet.tests.push(tes);
-                    
-                    if (res) {
-                        testSet.success++;
-                    } else {
-                        testSet.failure++;
-                    }
-                }
-            }
-        );
-        
-        testSet.save();
-        
-        // cleanup
-        Test.findBy({ relatedTo: relatedTo }).forEach(
-            function(test) {
-                test.delete();
-            }
-        );
-        
-        return TestSet.findBy({ relatedTo: relatedTo })[0];
     }
 };

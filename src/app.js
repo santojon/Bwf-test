@@ -3,6 +3,8 @@ loadScript('loader.js', function() {
     // Timeout is needed to loader get all necessary data
     setTimeout(function() {
         
+        console.log([{ name: 34 }, { name: 1 }, { name: 9 }].avg('name'));
+        
         /**
          * The app itself.
          */
@@ -38,26 +40,6 @@ loadScript('loader.js', function() {
         document.getElementById('btn-create-dshb').onclick = createDashboard;
         
         //console.log(dataPool.exportAs('bwf'));
-        
-        console.log(
-            classLoader.valuate('Dashboard: {\
-                			name: asd,\
-                			base: asd asd,\
-                			extras: {\
-                			    tiles: [ nothing to lose, blah, kkk, _ks, kls ],\
-                			    base: basic\
-                            },\
-                            owner: {\
-                                username: santojon-dev\
-                            }\
-                		}')
-        );
-        
-        console.log(
-            classLoader.valuate('User: {\
-                			username: asd\
-                		}')
-        );
         
         //console.log(getFiles('controllers'));
         
