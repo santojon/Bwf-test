@@ -3,8 +3,6 @@ loadScript('loader.js', function() {
     // Timeout is needed to loader get all necessary data
     setTimeout(function() {
         
-        console.log([{ name: 34 }, { name: 1 }, { name: 9 }].avg('name'));
-        
         /**
          * The app itself.
          */

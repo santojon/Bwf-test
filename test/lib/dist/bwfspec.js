@@ -9,7 +9,27 @@ var bwfSpec = {
      * Responsible to create necessary resources before run the tests
      */
     setUp: function() {
+        // Create needed classes (if don't exsists)
+        if (!window['TestSet']) {
+            classLoader.create('TestSet: {\
+                                    relatedTo: string,\
+                                    date: string,\
+                                    tests: list,\
+                                    failure: number,\
+                                    success: number\
+                                }');
+            dataPool.map(TestSet);
+        }
         
+        if (!window['Test']) {
+            classLoader.create('Test: {\
+                                    name: string,\
+                                    relatedTo: string,\
+                                    result: boolean,\
+                                    trace: string\
+                                }');
+            dataPool.map(Test);
+        }
     },
     
     /**

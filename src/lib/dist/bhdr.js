@@ -18,6 +18,12 @@ function Bhdr(options) {
             return this;
         },
         /**
+	     * Function to validate instance of Bhdr
+	     */
+	    instanceof: function(klass) {
+	        return (klass.prototype.constructor.name === 'Bhdr');
+	    },
+        /**
          * Create a table if it not exists
          * @param klass: the class of the objects of the table
          */
@@ -44,6 +50,7 @@ function Bhdr(options) {
         /**
          * Alter a table if it exists
          * @param klass: the class of the objects of the table
+         * @param opt: the options used to alter table
          */
         alterTable: function(klass, opt) {
             var cname = klass.prototype.constructor.name;
@@ -158,8 +165,9 @@ function Bhdr(options) {
                         Object.keys(data[cname]).forEach(
                             function(k) {
                                 if (data[cname][k][key] &&
-                                        (data[cname][k][key]
-                                            .toLowerCase() === opt[key].toLowerCase())) {
+                                        (data[cname][k][key].toString()
+                                                .toLowerCase() === opt[key]
+                                                    .toString().toLowerCase())) {
                                     
                                     result.push(data[cname][k]);
                                 }
@@ -278,6 +286,29 @@ function Bhdr(options) {
             return result.unique();
         },
         /**
+         * Find using strict function as condition
+         * @param klass: the class of the objects to find
+         * @param rfunc: boolean function to validate object
+         */
+        findWhere: function(klass, rfunc) {
+            var cname = klass.prototype.constructor.name;
+            var result = [];
+            
+            if (data[cname]) {
+                Object.keys(data[cname]).forEach(
+                    function(k) {
+                        if (k !== 'id') {
+                            if (rfunc(data[cname][k])) {
+                                result.push(data[cname][k]);
+                            }
+                        }
+                    }
+                );
+            }
+            
+            return result.unique();
+        },
+        /**
          * Map the Bhr main functions in class
          * @param klass: the class to map
          */
@@ -294,12 +325,24 @@ function Bhdr(options) {
                 return pool.prototype.findBy(klass, opt);
             };
             
+            klass.findByI = function(opt) {
+                return pool.prototype.findByI(klass, opt);
+            };
+            
+            klass.findByLike = function(opt) {
+                return pool.prototype.findByLike(klass, opt);
+            };
+            
             klass.findByILike = function(opt) {
                 return pool.prototype.findByILike(klass, opt);
             };
             
             klass.findAll = function() {
                 return pool.prototype.findAll(klass);
+            };
+            
+            klass.findWhere = function(rfunc) {
+                return pool.prototype.findWhere(klass, rfunc);
             };
             
             klass.get = function(id) {
@@ -321,6 +364,24 @@ function Bhdr(options) {
             klass.dropTable = function() {
             	return pool.prototype.dropTable(klass);
             };
+            
+            // Add mapping for all properties in objects to array (if inexistent)
+            Object.keys(klass.prototype).forEach(function(k) {
+                Array.prototype[k] = Array.prototype[k] || function() {
+                    if (this[0]) {
+                        if (this[0]['instanceof']) {
+                            if (this[0]['instanceof'](klass)) {
+                                return this.map(function(x) { return x[k]; });
+                            }
+                        } else {
+                            if (this[0] instanceof klass) {
+                                return this.map(function(x) { return x[k]; });
+                            }
+                        }
+                    }
+                    return [];
+                };
+            });
             
             return klass;
         },

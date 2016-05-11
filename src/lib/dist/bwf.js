@@ -18,6 +18,9 @@ function Bwf(elem, options) {
      * @param options: the properties to insert into class
      */
     var classTemplate = function(className, options) {
+        options['instanceof'] = function(klass) {
+            return (klass.prototype.constructor.name === className);
+        };
         var keys = options ? Object.keys(options) : '';
         var code = 'this.f = function ' + className + '(options) {\
             var c = this;\
