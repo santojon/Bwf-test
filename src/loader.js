@@ -10,9 +10,11 @@ loadScripts(['models/User.bwf', 'models/Dashboard.bwf'], function() {
                                         'https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'], function() {
                                 loadStyleAsset('style', function() {
                                     loadScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', function() {
-                                        
-                                        // show hidden things in screen
-                                        unhideAll();
+                                        loadScript('bootstrap.js', function() {
+
+                                            // show hidden things in screen
+                                            unhideAll();
+                                        })
                                     })
                                 })
                             })

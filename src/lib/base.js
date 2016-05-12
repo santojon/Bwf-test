@@ -1,4 +1,46 @@
 /**
+ * Function responsible to fetch a custom file
+ */
+function loadCustomFile(url, type, callback) {
+    // Adding the script tag to the head as suggested before
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+    script.type = 'text/x-' + type;
+    script.src = url;
+
+    // Then bind the event to the callback function.
+    // There are several events for cross browser compatibility.
+    //script.onreadystatechange = callback;
+    script.onload = callback;
+
+    // Fire the loading
+    head.appendChild(script);
+}
+
+/**
+ * Function responsible to fetch custom files
+ */
+function loadCustomFiles(urls, type, callback) {
+    urls.forEach(function(url, i) {
+        // Adding the script tag to the head as suggested before
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.type = 'text/x-' + type;
+        script.src = url;
+
+        // Then bind the event to the callback function.
+        // There are several events for cross browser compatibility.
+        if (i === (urls.length - 1)) {
+            //script.onreadystatechange = callback;
+            script.onload = callback;
+        }
+
+        // Fire the loading
+        head.appendChild(script);
+    });
+}
+
+/**
  * Function responsible to fetch scripts
  */
 function loadScript(url, callback) {
@@ -27,14 +69,14 @@ function loadScripts(urls, callback) {
         var script = document.createElement('script');
         script.type = 'text/javascript';
         script.src = url;
-    
+
         // Then bind the event to the callback function.
         // There are several events for cross browser compatibility.
         if (i === (urls.length - 1)) {
             //script.onreadystatechange = callback;
             script.onload = callback;
         }
-    
+
         // Fire the loading
         head.appendChild(script);
     });
@@ -49,12 +91,12 @@ function loadController(url, callback) {
     var script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = 'controllers/' + url + 'controller.js';
-    
+
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
     //script.onreadystatechange = callback;
     script.onload = callback;
-    
+
     // Fire the loading
     head.appendChild(script);
 }
@@ -69,14 +111,14 @@ function loadControllers(urls, callback) {
         var script = document.createElement('script');
         script.type = 'text/javascript';
         script.src = 'controllers/' + url + 'controller.js';
-        
+
         // Then bind the event to the callback function.
         // There are several events for cross browser compatibility.
         if (i === (urls.length - 1)) {
             //script.onreadystatechange = callback;
             script.onload = callback;
         }
-        
+
         // Fire the loading
         head.appendChild(script);
     });
@@ -91,12 +133,12 @@ function loadDomain(url, callback) {
     var script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = 'domain/' + url + '.js';
-    
+
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
     //script.onreadystatechange = callback;
     script.onload = callback;
-    
+
     // Fire the loading
     head.appendChild(script);
 }
@@ -132,14 +174,14 @@ function loadStyles(urls, callback) {
         style.rel = 'stylesheet';
         style.type = 'text/css';
         style.href = url;
-    
+
         // Then bind the event to the callback function.
         // There are several events for cross browser compatibility.
         if (i === (urls.length - 1)) {
             //style.onreadystatechange = callback;
             style.onload = callback;
         }
-    
+
         // Fire the loading
         head.appendChild(style);
     });
@@ -176,14 +218,14 @@ function loadStyleAssets(urls, callback) {
         style.rel = 'stylesheet';
         style.type = 'text/css';
         style.href = 'assets/css/' + url + '.css';
-    
+
         // Then bind the event to the callback function.
         // There are several events for cross browser compatibility.
         if (i === (urls.length - 1)) {
             //style.onreadystatechange = callback;
             style.onload = callback;
         }
-    
+
         // Fire the loading
         head.appendChild(style);
     });

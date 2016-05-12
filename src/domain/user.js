@@ -6,13 +6,3 @@ classLoader.create('User: {\
 
 // Map class to 'database'
 dataPool.map(User);
-
-
-
-// ----------------------------------------------
-// Create instances
-// ----------------------------------------------
-
-new User({username: 'santojon'}).save();
-new User({username: 'blah'}).save();
-new User({username: 'manolo'}).save();

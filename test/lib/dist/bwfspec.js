@@ -2,9 +2,9 @@
  * Tests for Beowulf lib
  */
 var bwfSpec = {
-    
+
     relatedTo: 'Beowulf',
-    
+
     /**
      * Responsible to create necessary resources before run the tests
      */
@@ -20,7 +20,7 @@ var bwfSpec = {
                                 }');
             dataPool.map(TestSet);
         }
-        
+
         if (!window['Test']) {
             classLoader.create('Test: {\
                                     name: string,\
@@ -31,7 +31,7 @@ var bwfSpec = {
             dataPool.map(Test);
         }
     },
-    
+
     /**
      * Responsible to do a cleanup run  after tests
      */
@@ -40,12 +40,12 @@ var bwfSpec = {
         Test.dropTable();
         TestSet.dropTable();
     },
-    
+
     /**
      * All tests f this set
      */
     tests: {
-        
+
         /**
          * Test for creating a Bwf instance without any option
          */
@@ -56,38 +56,38 @@ var bwfSpec = {
                 name: 'testSimpleInstance',
                 result: false
             });
-            
+
             // do test
             try {
                 var bwf = new Bwf();
-                
+
                 if (bwf.instanceof(Bwf)) {
                     t.result = true;
                     t.trace = 'Beowulf created successfully!';
                 }
             } catch (e) {
-                t.trace = t.trace + e.stack;
+                t.trace = t.trace + e.stack.toString().replace('JSON', 'Bwf');
             }
-            
+
             //save test
             t.save();
             return t.result;
         },
-        
+
         /**
          * TODO Test for creating a Bwf instance successfully with options
          */
         testOptionsInstanceSuccess: function(options) {
             // body...
         },
-        
+
         /**
          * TODO Test for creating a Bwf instance unsuccessfully with options
          */
         testOptionsInstanceFailure: function(options) {
             // body...
         },
-        
+
         /**
          * Test for instancing a simple class with Bwf successfully
          */
@@ -98,24 +98,24 @@ var bwfSpec = {
                 name: 'testSimpleCreateSuccess',
                 result: false
             });
-            
+
             // do test
             try {
                 var bwf = new Bwf('TestClass: { className: string }').create();
-                
+
                 if (TestClass) {
                     t.result = true;
                     t.trace = 'Class created successfully!';
                 }
             } catch (e) {
-                t.trace = t.trace + e.stack;
+                t.trace = t.trace + e.stack.toString().replace('JSON', 'Bwf');
             }
-            
+
             //save test
             t.save();
             return t.result;
         },
-        
+
         /**
          * Test for instancing a simple class with Bwf unsuccessfully
          */
@@ -126,24 +126,24 @@ var bwfSpec = {
                 name: 'testSimpleCreateFailure',
                 result: true
             });
-            
+
             // do test
             try {
                 var bwf = new Bwf('TestClass: { className: string ').create();
-                
+
                 if (TestClass) {
                     t.result = false;
                     t.trace = 'Class created, but expected is not!';
                 }
             } catch (e) {
-                t.trace = t.trace + e.toString();
+                t.trace = t.trace + e.toString().replace('JSON', 'Bwf');
             }
-            
+
             //save test
             t.save();
             return t.result;
         },
-        
+
         /**
          * Test for instancing a complex class with Bwf successfully
          */
@@ -154,7 +154,7 @@ var bwfSpec = {
                 name: 'testComplexCreateSuccess',
                 result: false
             });
-            
+
             // do test
             try {
                 var bwf = new Bwf('TestClass2: {\
@@ -171,20 +171,20 @@ var bwfSpec = {
                                         }\
                                     }\
                                 }').create();
-                
+
                 if (TestClass2) {
                     t.result = true;
                     t.trace = 'Class created successfully!';
                 }
             } catch (e) {
-                t.trace = t.trace + e.stack;
+                t.trace = t.trace + e.stack.toString().replace('JSON', 'Bwf');
             }
-            
+
             //save test
             t.save();
             return t.result;
         },
-        
+
         /**
          * Test for instancing a complex class with Bwf unsuccessfully
          */
@@ -195,7 +195,7 @@ var bwfSpec = {
                 name: 'testComplexCreateFailure',
                 result: true
             });
-            
+
             // do test
             try {
                 var bwf = new Bwf('TestClass2: {\
@@ -212,20 +212,20 @@ var bwfSpec = {
                                         }\
                                     }\
                                 }').create();
-                
+
                 if (TestClass2) {
                     t.result = false;
                     t.trace = 'Class created, but expected is not!';
                 }
             } catch (e) {
-                t.trace = t.trace + e.toString();
+                t.trace = t.trace + e.toString().replace('JSON', 'Bwf');
             }
-            
+
             //save test
             t.save();
             return t.result;
         },
-        
+
         /**
          * Test for valuating a simple class with Bwf successfully
          */
@@ -236,26 +236,26 @@ var bwfSpec = {
                 name: 'testSimpleValuateSuccess',
                 result: false
             });
-            
+
             // do test
             try {
                 var v = classLoader.valuate('TestClass: {\
                                     			className: asd\
                                     		}');
-                
+
                 if (v.className === 'asd') {
                     t.result = true;
                     t.trace = 'Class valuated successfully!';
                 }
             } catch (e) {
-                t.trace = t.trace + e.stack;
+                t.trace = t.trace + e.stack.toString().replace('JSON', 'Bwf');
             }
-            
+
             //save test
             t.save();
             return t.result;
         },
-        
+
         /**
          * Test for valuating a simple class with Bwf unsuccessfully
          */
@@ -266,26 +266,26 @@ var bwfSpec = {
                 name: 'testSimpleValuateFailure',
                 result: true
             });
-            
+
             // do test
             try {
                 var v = classLoader.valuate('TestClass: {\
                                     			className: asd!\
                                     		}');
-                
+
                 if (v['className'] === undefined) {
                     t.result = false;
                     t.trace = 'Class valuated, but expected is not!';
                 }
             } catch (e) {
-                t.trace = t.trace + e.toString();
+                t.trace = t.trace + e.toString().replace('JSON', 'Bwf');
             }
-            
+
             //save test
             t.save();
             return t.result;
         },
-        
+
         /**
          * Test for valuating a complex class with Bwf successfully
          */
@@ -296,7 +296,7 @@ var bwfSpec = {
                 name: 'testComplexValuateSuccess',
                 result: false
             });
-            
+
             // do test
             try {
                 var v = classLoader.valuate('TestClass2: {\
@@ -312,20 +312,20 @@ var bwfSpec = {
                                                     }\
                                                 }\
                                             }');
-                
+
                 if ((v.className === 'all OK') && (v.misc === { states: [ true, false ] })) {
                     t.result = true;
                     t.trace = 'Class valuated successfully!';
                 }
             } catch (e) {
-                t.trace = t.trace + e.stack;
+                t.trace = t.trace + e.stack.toString().replace('JSON', 'Bwf');
             }
-            
+
             //save test
             t.save();
             return t.result;
         },
-        
+
         /**
          * Test for valuating a complex class with Bwf unsuccessfully
          */
@@ -336,7 +336,7 @@ var bwfSpec = {
                 name: 'testComplexValuateFailure',
                 result: true
             });
-            
+
             // do test
             try {
                 var v = classLoader.valuate('TestClass2: {\
@@ -352,15 +352,15 @@ var bwfSpec = {
                                                     }\
                                                 }\
                                             }');
-                
+
                 if (v['className'] === undefined) {
                     t.result = false;
                     t.trace = 'Class valuated, but expected is not!';
                 }
             } catch (e) {
-                t.trace = t.trace + e.toString();
+                t.trace = t.trace + e.toString().replace('JSON', 'Bwf');
             }
-            
+
             //save test
             t.save();
             return t.result;

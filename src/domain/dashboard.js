@@ -6,7 +6,7 @@ classLoader.create('Dashboard: {\
 		    base: string,\
 		    extras: object\
         }');
-        
+
 // Map class to 'database'
 dataPool.map(Dashboard);
 
@@ -30,18 +30,18 @@ Dashboard.prototype.toHtml = function(cls) {
 	    					</span><small></div>' + '</a>';
 	    htmlStr = htmlStr + '<div class="panel-body">';
 	}
-	
+
 	Object.keys(db).forEach(
 		function(key) {
 			switch (typeof db[key]) {
 				case 'string':
 				    if (!(key === 'name')) {
-				        htmlStr = htmlStr + '<p>' 
+				        htmlStr = htmlStr + '<p>'
     						+ key + ': <code>' + db[key] + '</code></p>';
 				    }
 					break;
 				case 'number':
-					htmlStr = htmlStr + '<p>' 
+					htmlStr = htmlStr + '<p>'
 						+ key + ': <code>' + db[key] + '</code></p>';
 					break;
 				case 'object':
@@ -55,7 +55,7 @@ Dashboard.prototype.toHtml = function(cls) {
     					);
     					htmlStr = htmlStr + '</ul>';
 					} else if (db[key] instanceof User) {
-						htmlStr = htmlStr + '<p>' 
+						htmlStr = htmlStr + '<p>'
 							+ key + ': <code>' + db[key]['username'] + '</code></p>';
 					} else {
 						htmlStr = htmlStr + '<p>' + key + ':</p>' +
@@ -68,52 +68,3 @@ Dashboard.prototype.toHtml = function(cls) {
 	);
 	return htmlStr + '</div></div>';
 };
-
-
-
-
-// ----------------------------------------------------------
-// Create Dashboards
-// ----------------------------------------------------------
-
-new Dashboard({
-		name: 'homeBase',
-	   	owner: User.findBy({ username: 'santojon' })[0],
-		tiles: ['lights', 'water', 'tv', 'pc', 'security', 'cameras']
-	}).save();
-    			
-new Dashboard({
-		name: 'home',
-		owner: User.findBy({ username: 'santojon' })[0],
-		base: 'homeBase',
-		tiles: ['locks', 'people'],
-		extras: {
-			tiles: ['games', 'stats']
-		}
-	}).save();
-    			
-new Dashboard({
-		name: 'work',
-		owner: User.findBy({ username: 'santojon' })[0],
-		tiles: ['tasks', 'hours', 'coffee', 'slack', 'time tracking', 'issues'],
-		extras: {
-			tiles: ['news', 'forecast', 'traffic']
-		}
-	}).save();
-				 
-new Dashboard({
-		name: 'overall',
-		owner: User.findBy({ username: 'blah' })[0],
-		base: 'home',
-		tiles: ['kids', 'wife', 'to-do lists'],
-		extras: {
-			base: 'work',
-			tiles: ['family', 'calendar', 'hollidays']
-		}
-	}).save();
-				
-new Dashboard({
-		name: 'all',
-		owner: User.findBy({ username: 'manolo' })[0],
-		base: 'overall'
-	}).save();
