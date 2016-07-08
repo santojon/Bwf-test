@@ -3,6 +3,3 @@ classLoader.create('User: {\
             username: string,\
             password: string\
         }');
-
-// Map class to 'database'
-dataPool.map(User);

@@ -23,7 +23,7 @@ function readTextFile(file) {
     if (!window['classesTmp']) {
         window['classesTmp'] = {};
     }
-                
+
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", file, false);
     rawFile.onreadystatechange = function ()

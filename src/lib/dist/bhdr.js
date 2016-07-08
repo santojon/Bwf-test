@@ -487,13 +487,13 @@ function Bhdr(options) {
      */
     Array.prototype.remove = function (val) {
         var i = this.indexOf(val);
-        return (i > -1) ? this.splice(i, 1) : [];
+        return (i > -1) ? this.splice(i, 1) : this;
     };
 
     /**
      * Remove all duplicated values from array
      */
-    Array.prototype.unique = function () {
+    Array.prototype.distinct = function () {
 	    return this.sort().filter(function(item, pos, array) {
 	        return !pos || item != array[pos - 1];
 	    });
@@ -512,15 +512,15 @@ function Bhdr(options) {
      * @param reverse: true to order descending
      * @param rfunc: function to restrict compairson scope (if needed)
      */
-	Array.prototype.orderBy = function (field, reverse, rfunc) {
+	Array.prototype.orderBy = function (field, order, rfunc) {
 	    var key = rfunc ?
            function(x) { return rfunc(x[field]); } :
            function(x) { return x[field]; };
 
-        reverse = !reverse ? 1 : -1;
+        order = (order === 'desc') ? -1 : 1;
 
 	    return this.sort(function (a, b) {
-	        return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
+	        return a = key(a), b = key(b), order * ((a > b) - (b > a));
         });
 	};
 
@@ -536,8 +536,7 @@ function Bhdr(options) {
 	        });
 
 	        return r.reduce(function(a, b) { return a + b; }) / this.count();
-	    } else {
-	        return 0;
 	    }
+	    return 0;
 	};
 })();

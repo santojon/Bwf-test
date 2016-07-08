@@ -1,27 +1,44 @@
-// Load all needed data here. Chain order is very important!
-loadScripts(['models/User.bwf', 'models/Dashboard.bwf'], function() {
-    loadScripts(['lib/utils.js', 'lib/dist/bhdr.js', 'https://code.jquery.com/jquery-2.2.3.min.js', 'lib/dist/bwf.js'], function() {
-        loadScript('conf.js', function() {
-            loadDomain('user', function() {
-                loadDomain('dashboard', function() {
-                    loadController('user', function() {
-                        loadController('dashboard', function() {
-                            loadStyles(['https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
-                                        'https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'], function() {
-                                loadStyleAsset('style', function() {
-                                    loadScript('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', function() {
-                                        loadScript('bootstrap.js', function() {
+/**
+ * Load all needed data here. Chain order is very important!
+ */
 
-                                            // show hidden things in screen
-                                            unhideAll();
-                                        })
-                                    })
-                                })
-                            })
-                        })
-                    })
-                })
-            })
-        })
-    })
+// Load project dependencies
+progressiveLoad(appConfig.conf.dependencies, loadScript, function() {
+    // Inject 'classLoader'
+    container['classLoader'] = new container[appConfig.conf.classLoader]();
+
+    // Inject 'database' access
+    container['dataPool'] = new container[appConfig.conf.dataPool]();
+
+    // Load back-end files
+    progressiveLoad(appConfig.back.domainClasses, loadDomain, function() {
+        progressiveLoad(appConfig.back.controllers, loadController, function() {
+            progressiveLoad(appConfig.back.services, loadService, function() {
+
+                // Map the classes to 'database'
+                progressiveLoad(['dataMappings.js'], loadScript, function() {
+                    // If bootstrap data is set on
+                    if (appConfig.conf.bootstrap) {
+                        progressiveLoad(['bootstrap.js'], loadScript, function() {
+
+                        });
+                    }
+                });
+
+                // Load front-end files
+                progressiveLoad(appConfig.front.externalScripts, loadScript, function() {
+                    progressiveLoad(appConfig.front.scripts, loadScriptAsset, function() {
+                        progressiveLoad(appConfig.front.externalStyles, loadStyle, function() {
+                            progressiveLoad(appConfig.front.styles, loadStyleAsset, function() {
+                                // Run main script
+                                progressiveLoad(['main.js'], loadScript, function() {
+
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    });
 });

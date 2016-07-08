@@ -7,9 +7,6 @@ classLoader.create('Dashboard: {\
 		    extras: object\
         }');
 
-// Map class to 'database'
-dataPool.map(Dashboard);
-
 
 
 // -----------------------------------------------
