@@ -15,7 +15,7 @@ var DashboardController = {
         var dashboards = Dashboard.findBy({ owner: currentUser });
         dashboards.forEach(
         	function(v) {
-        	    appendDashboard('dashboards', v);
+        	    DashboardController.appendDashboard('dashboards', v);
         	}
         );
 
@@ -33,7 +33,7 @@ var DashboardController = {
                         li.innerHTML = '<a id="' + v.username + '-li" ' + 'href="#">' + v.username + '</a>';
                         document.getElementById('chg-lst').appendChild(li);
                     }
-                    document.getElementById(v.username + '-li').onclick = changeDashboard;
+                    document.getElementById(v.username + '-li').onclick = DashboardController.changeDashboard;
         		}
             }
         );
@@ -45,7 +45,7 @@ var DashboardController = {
         var username = document.getElementById('currentUser').innerHTML;
         var currentUser = User.findBy({ username: username })[0];
 
-        appendDashboard('dashboards',
+        DashboardController.appendDashboard('dashboards',
             Dashboard.add(
                 new Dashboard({
                     name: 'new',
@@ -65,7 +65,7 @@ var DashboardController = {
      * @param name: the name of the dashboard to remove
      */
     removeDashboard: function(name) {
-        unAppendDashboard('dashboards',
+        DashboardController.unAppendDashboard('dashboards',
             Dashboard.remove(
                 Dashboard.findBy({ name: name })[0]
             )

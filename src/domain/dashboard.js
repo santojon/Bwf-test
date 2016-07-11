@@ -22,7 +22,7 @@ Dashboard.prototype.toHtml = function(cls) {
 	if (cls) {
 	    htmlStr = '<div id="' + db['name'] + '" class="panel panel-default ' + (cls || '') + '">';
 	    htmlStr = htmlStr + '<div class="panel-heading">' + db['name']
-	    			+ '<a href="#" class="pull-right" onclick="removeDashboard(\'' + db['name']
+	    			+ '<a href="#" class="pull-right" onclick="DashboardController.removeDashboard(\'' + db['name']
 	    				+ '\');"><small><span class="glyphicon glyphicon-trash">\
 	    					</span><small></div>' + '</a>';
 	    htmlStr = htmlStr + '<div class="panel-body">';
