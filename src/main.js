@@ -2,4 +2,4 @@
  * The main page
  */
 
-pages.Dashboards();
+pages.Dashboards({ username: 'manolo' });

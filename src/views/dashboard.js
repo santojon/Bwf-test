@@ -1,4 +1,4 @@
-pages.Dashboards = function(options) {
+pages.Dashboards = function(params) {
     // Get all needed scopes (another js objects like controllers, services etc.)
     with (
         /**
@@ -11,7 +11,7 @@ pages.Dashboards = function(options) {
             Utils
         )
     ) {
-        var currentUser = User.find({ username: 'santojon' });
+        var currentUser = User.find({ username: params ? (params.username ? params.username : 'santojon') : 'santojon' });
         var allUsers = User.findAll().distinct();
 
         // add current user username to screen
