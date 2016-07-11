@@ -2,7 +2,12 @@
 // Create instances
 // ----------------------------------------------
 
-new User({username: 'santojon'}).save(function(usr) {
+new User({
+    username: 'santojon',
+    password: 'senha',
+    name: 'Jonathan Santos',
+    email: 'santojon5@gmail.com'
+}).save(function(usr) {
     new Dashboard({
     		name: 'homeBase',
     	   	owner: usr,
@@ -29,7 +34,12 @@ new User({username: 'santojon'}).save(function(usr) {
     	}).save();
 });
 
-new User({username: 'blah'}).save(function(usr) {
+new User({
+    username: 'blah',
+    password: 'senha',
+    name: 'Blah Blah',
+    email: 'blah@blah.com'
+}).save(function(usr) {
     new Dashboard({
     		name: 'overall',
     		owner: usr,
@@ -42,7 +52,12 @@ new User({username: 'blah'}).save(function(usr) {
     	}).save();
 });
 
-new User({username: 'manolo'}).save(function(usr) {
+new User({
+    username: 'manolo',
+    password: 'senha',
+    name: 'Manolo Supimpa',
+    email: 'manolo@supimpa.com'
+}).save(function(usr) {
     new Dashboard({
     		name: 'all',
     		owner: usr,

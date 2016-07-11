@@ -1,3 +1,5 @@
-var UserController = {
+with (UserService) {
+    var UserController = {
 
-};
+    };
+}

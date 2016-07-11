@@ -16,6 +16,8 @@ var container = this;
  *      @param domainClasses: list of names of the domain classes to be loaded
  *      @param controllers: list of names of the controllers to be loaded (same as domain name)
  *      @param services: list of names of the services to be loaded (same as domain name)
+ *      @param views: the name of application views (same as domain name)
+ *      @param full: list of names of the domain classes, services, controllers and views to be loaded, full stack (one per domain)
  * }
  * @param conf: entire project dependencies and configuration {
  *      @param appName: the name of the application
@@ -43,9 +45,8 @@ var appConfig = {
         ]
     },
     back: {
-        domainClasses: ['user', 'dashboard'],
-        controllers: ['user', 'dashboard'],
-        services: ['user', 'dashboard']
+        full: ['user', 'dashboard'],
+        services: ['security']
     },
     conf: {
         appName: 'Dashboards',

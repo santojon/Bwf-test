@@ -1,38 +1,58 @@
 /**
  * Load all needed data here. Chain order is very important!
  */
-with (Base) {
+
+// Verifies if has any full loading
+if (appConfig.back['full']) {
+
+    if (!appConfig.back['domainClasses']) appConfig.back['domainClasses'] = [];
+    if (!appConfig.back['controllers']) appConfig.back['controllers'] = [];
+    if (!appConfig.back['services']) appConfig.back['services'] = [];
+    if (!appConfig.back['views']) appConfig.back['views'] = [];
+
+    appConfig.back.full.forEach(function(conf) {
+        appConfig.back.domainClasses.push(conf);
+        appConfig.back.controllers.push(conf);
+        appConfig.back.services.push(conf);
+        appConfig.back.views.push(conf);
+    });
+}
+
+// Then load all things
+with (Base.autoMerge(appConfig.front, appConfig.back, appConfig.conf)) {
     // Load project dependencies
-    progressiveLoad(appConfig.conf.dependencies, loadScript, function() {
+    progressiveLoad(dependencies, loadScript, function() {
         // Inject 'classLoader'
-        container['classLoader'] = new container[appConfig.conf.classLoader]();
+        container['classLoader'] = new container[classLoader]();
 
         // Inject 'database' access
-        container['dataPool'] = new container[appConfig.conf.dataPool]();
+        container['dataPool'] = new container[dataPool]();
+
+        // Inject 'pages' manager
+        // TODO: create a page loader
+        container['pages'] = new Object();
 
         // Load back-end files
-        progressiveLoad(appConfig.back.domainClasses, loadDomain, function() {
-            progressiveLoad(appConfig.back.services, loadService, function() {
-                progressiveLoad(appConfig.back.controllers, loadController, function() {
+        progressiveLoad(domainClasses, loadDomain, function() {
+            progressiveLoad(services, loadService, function() {
+                progressiveLoad(controllers, loadController, function() {
 
                     // Map the classes to 'database'
                     progressiveLoad(['dataMappings.js'], loadScript, function() {
                         // If bootstrap data is set on
-                        if (appConfig.conf.bootstrap) {
-                            progressiveLoad(['bootstrap.js'], loadScript, function() {
-
-                            });
+                        if (bootstrap) {
+                            progressiveLoad(['bootstrap.js'], loadScript);
                         }
                     });
 
                     // Load front-end files
-                    progressiveLoad(appConfig.front.externalScripts, loadScript, function() {
-                        progressiveLoad(appConfig.front.scripts, loadScriptAsset, function() {
-                            progressiveLoad(appConfig.front.externalStyles, loadStyle, function() {
-                                progressiveLoad(appConfig.front.styles, loadStyleAsset, function() {
-                                    // Run main script
-                                    progressiveLoad(['main.js'], loadScript, function() {
-
+                    progressiveLoad(externalScripts, loadScript, function() {
+                        progressiveLoad(scripts, loadScriptAsset, function() {
+                            progressiveLoad(externalStyles, loadStyle, function() {
+                                progressiveLoad(styles, loadStyleAsset, function() {
+                                    progressiveLoad(views, loadView, function() {
+                                        // Run main script
+                                        progressiveLoad(['main.js'], loadScript);
                                     });
                                 });
                             });

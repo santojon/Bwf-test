@@ -224,6 +224,46 @@ var Base = {
         });
     },
     /**
+     * Function responsible to fetch view scripts
+     */
+    loadView: function(url, callback) {
+        // Adding the script tag to the head as suggested before
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'views/' + url + '.js';
+
+        // Then bind the event to the callback function.
+        // There are several events for cross browser compatibility.
+        //script.onreadystatechange = callback;
+        script.onload = callback;
+
+        // Fire the loading
+        head.appendChild(script);
+    },
+    /**
+     * Function responsible to fetch view scripts
+     */
+    loadViews: function(urls, callback) {
+        urls.forEach(function(url, i) {
+            // Adding the script tag to the head as suggested before
+            var head = document.getElementsByTagName('head')[0];
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'views/' + url + '.js';
+
+            // Then bind the event to the callback function.
+            // There are several events for cross browser compatibility.
+            if (i === (urls.length - 1)) {
+                //script.onreadystatechange = callback;
+                script.onload = callback;
+            }
+
+            // Fire the loading
+            head.appendChild(script);
+        });
+    },
+    /**
      * Function responsible to fetch domain scripts
      */
     loadDomain: function(url, callback) {
@@ -240,6 +280,28 @@ var Base = {
 
         // Fire the loading
         head.appendChild(script);
+    },
+    /**
+     * Function responsible to fetch domain scripts
+     */
+    loadDomains: function(urls, callback) {
+        urls.forEach(function(url, i) {
+            // Adding the script tag to the head as suggested before
+            var head = document.getElementsByTagName('head')[0];
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'domain/' + url + '.js';
+
+            // Then bind the event to the callback function.
+            // There are several events for cross browser compatibility.
+            if (i === (urls.length - 1)) {
+                //script.onreadystatechange = callback;
+                script.onload = callback;
+            }
+
+            // Fire the loading
+            head.appendChild(script);
+        });
     },
     /**
      * Function responsible to fetch stylesheets
@@ -324,5 +386,41 @@ var Base = {
             // Fire the loading
             head.appendChild(style);
         });
+    },
+    /**
+     * Used to merge many objects into a single one
+     */
+    merge: function() {
+        var args = Array.prototype.slice.call(arguments);
+        var result = {};
+
+        var merge_options = function(obj1, obj3){
+            for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+            return obj3;
+        };
+
+        args.forEach(function(argument) {
+            result = merge_options(argument, result);
+        });
+
+        return result;
+    },
+    /**
+     * Used to merge many objects into a single one adding self
+     */
+    autoMerge: function() {
+        var args = Array.prototype.slice.call(arguments);
+        var result = {};
+
+        var merge_options = function(obj1, obj3){
+            for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+            return obj3;
+        };
+
+        args.forEach(function(argument) {
+            result = merge_options(argument, result);
+        });
+
+        return merge_options(Base, result);
     }
 };
