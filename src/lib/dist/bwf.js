@@ -1,5 +1,5 @@
 // Global state at this point
-var that = this;
+var container = this;
 
 /**
  * Class responsible to create and valuate another classes
@@ -9,9 +9,9 @@ var that = this;
 function Bwf(elem, options) {
     var bwf = this;
     var elem = elem;
-    
+
     var result = {};
-    
+
     /**
      * A template to create classes
      * @param className: the name of the class (as string)
@@ -40,14 +40,14 @@ function Bwf(elem, options) {
             return c;\
         };';
         var klass = eval(code);
-        
+
         keys.forEach(function(key) {
             klass.prototype[key] = options[key];
         });
-        
+
         return klass;
     };
-    
+
     // the Bwf itself
     bwf.prototype = {
 	    init: function() {
@@ -66,7 +66,7 @@ function Bwf(elem, options) {
         create: function(el) {
             elem = el || elem;
             var parts = elem.splitOn(/ /);
-            
+
             // can split?
             if ((parts !== undefined) && (parts[0] !== '')) {
                 // Verify if is a class
@@ -74,17 +74,17 @@ function Bwf(elem, options) {
                     var className = parts[0].split(/:/)[0];
                     result[className] = {};
                     var klass = result[className];
-                    
+
                     // remove first element
                     parts.shift();
-                    
+
                     // Parse as Bwf JSON notation
-                    klass = JSON.parse(parts.join('').trim().replace(/[a-zA-Z0-9_]+[a-zA-Z0-9\-_ ]*/g, 
+                    klass = JSON.parse(parts.join('').trim().replace(/[a-zA-Z0-9_]+[a-zA-Z0-9\-_ ]*/g,
                         function(val) {
                             return '"' + val.trim() + '"';
                         }
                     ).trim());
-                    
+
                     // Set variable types
                     Object.keys(klass).forEach(
                         function(arg) {
@@ -109,17 +109,17 @@ function Bwf(elem, options) {
                                     break;
                                 default:
                                     klass[arg] = {};
-                                    break;   
+                                    break;
                             }
                         }
                     );
-                    
+
                     // return it
-                    that[className] = classTemplate(className, klass);
-                    return that[className];
+                    container[className] = classTemplate(className, klass);
+                    return container[className];
                 }
             }
-            
+
             return result;
         },
         /**
@@ -128,20 +128,20 @@ function Bwf(elem, options) {
          */
         valuate: function(val) {
             var parts = val.splitOn(/ /);
-            
+
             // can split?
             if ((parts !== undefined) && (parts[0] !== '')) {
                 // Verify if is a class
                 if (parts[0] !== parts[0].toLowerCase()) {
                     var className = parts[0].split(/:/)[0];
-                    
+
                     // class exists ?
-                    if (that[className]) {
-                    
+                    if (container[className]) {
+
                         // remove first element
                         parts.shift();
                         var p = [];
-                        
+
                         var pp = parts.join(' ').trim().split('');
                         pp.forEach(
                             function(k, i) {
@@ -150,39 +150,39 @@ function Bwf(elem, options) {
                                 }
                             }
                         );
-                        
-                        var json = JSON.parse('{' + p.join('').trim().replace(/[a-zA-Z0-9_]+[a-zA-Z0-9\-_ ]*/g, 
+
+                        var json = JSON.parse('{' + p.join('').trim().replace(/[a-zA-Z0-9_]+[a-zA-Z0-9\-_ ]*/g,
                             function(val) {
                                 return '"' + val.trim() + '"';
                             }
                         ).trim() + '}');
-                        
+
                         // parse rest of the string
-                        return new that[className](json);
+                        return new container[className](json);
                     }
                 }
             }
-            
+
             return result;
         }
     };
-    
+
     return bwf.prototype.init();
 }
 
 (function() {
     var trimParts = function(lst, pattern) {
         var parts = [];
-        
+
         lst.forEach(function(part) {
             parts.push(part.trim());
         });
-        
+
         return parts.filter(function(p) {
             return !p.match(pattern);
         });
     };
-    
+
     String.prototype.splitOn = function(pattern) {
         var t = trimParts(this.trim().split(pattern), pattern);
         var result = [];

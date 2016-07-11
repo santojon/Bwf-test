@@ -32,7 +32,7 @@ var container = this;
 var appConfig = {
     front: {
         styles: ['style'],
-        scripts: [],
+        scripts: ['utils'],
         externalStyles: [
             'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
             'https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'
@@ -45,12 +45,11 @@ var appConfig = {
     back: {
         domainClasses: ['user', 'dashboard'],
         controllers: ['user', 'dashboard'],
-        services: []
+        services: ['user', 'dashboard']
     },
     conf: {
         appName: 'Dashboards',
         dependencies: [
-            'lib/utils.js',
             'lib/dist/bhdr.js',
             'lib/dist/bwf.js'
         ],
