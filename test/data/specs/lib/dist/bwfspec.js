@@ -2,23 +2,22 @@
  * Tests for Beowulf lib
  */
 var bwfSpec = {
-
     relatedTo: 'Beowulf',
 
     /**
      * Responsible to create necessary resources before run the tests
      */
-    setUp: function() {
+    setUp: function () {
         // Create needed classes (if don't exsists)
-        if (!window['TestSet']) {
-            classLoader.create('TestSet: {\
+        if (!window['Testset']) {
+            classLoader.create('Testset: {\
                                     relatedTo: string,\
                                     date: string,\
                                     tests: list,\
                                     failure: number,\
                                     success: number\
-                                }');
-            dataPool.map(TestSet);
+                                }')
+            dataPool.map(Testset)
         }
 
         if (!window['Test']) {
@@ -27,18 +26,18 @@ var bwfSpec = {
                                     relatedTo: string,\
                                     result: boolean,\
                                     trace: string\
-                                }');
-            dataPool.map(Test);
+                                }')
+            dataPool.map(Test)
         }
     },
 
     /**
      * Responsible to do a cleanup run  after tests
      */
-    tearDown: function() {
+    tearDown: function () {
         // cleanup
-        Test.dropTable();
-        TestSet.dropTable();
+        Test.dropTable()
+        Testset.dropTable()
     },
 
     /**
@@ -49,111 +48,111 @@ var bwfSpec = {
         /**
          * Test for creating a Bwf instance without any option
          */
-        testSimpleInstance: function() {
+        testSimpleInstance: function () {
             // create test
             var t = new Test({
                 relatedTo: bwfSpec.relatedTo,
                 name: 'testSimpleInstance',
                 result: false
-            });
+            })
 
             // do test
             try {
-                var bwf = new Bwf();
+                var bwf = new Bwf()
 
                 if (bwf.instanceof(Bwf)) {
-                    t.result = true;
-                    t.trace = 'Beowulf created successfully!';
+                    t.result = true
+                    t.trace = 'Beowulf created successfully!'
                 }
             } catch (e) {
-                t.trace = t.trace + e.stack.toString().replace('JSON', 'Bwf');
+                t.trace = t.trace + e.stack.toString().replace('JSON', 'Bwf')
             }
 
             //save test
-            t.save();
-            return t.result;
+            t.save()
+            return t.result
         },
 
         /**
          * TODO Test for creating a Bwf instance successfully with options
          */
-        testOptionsInstanceSuccess: function(options) {
+        testOptionsInstanceSuccess: function (options) {
             // body...
         },
 
         /**
          * TODO Test for creating a Bwf instance unsuccessfully with options
          */
-        testOptionsInstanceFailure: function(options) {
+        testOptionsInstanceFailure: function (options) {
             // body...
         },
 
         /**
          * Test for instancing a simple class with Bwf successfully
          */
-        testSimpleCreateSuccess: function() {
+        testSimpleCreateSuccess: function () {
             // create test
             var t = new Test({
                 relatedTo: bwfSpec.relatedTo,
                 name: 'testSimpleCreateSuccess',
                 result: false
-            });
+            })
 
             // do test
             try {
-                var bwf = new Bwf('TestClass: { className: string }').create();
+                var bwf = new Bwf('TestClass: { className: string }').create()
 
                 if (TestClass) {
-                    t.result = true;
-                    t.trace = 'Class created successfully!';
+                    t.result = true
+                    t.trace = 'Class created successfully!'
                 }
             } catch (e) {
-                t.trace = t.trace + e.stack.toString().replace('JSON', 'Bwf');
+                t.trace = t.trace + e.stack.toString().replace('JSON', 'Bwf')
             }
 
             //save test
-            t.save();
-            return t.result;
+            t.save()
+            return t.result
         },
 
         /**
          * Test for instancing a simple class with Bwf unsuccessfully
          */
-        testSimpleCreateFailure: function() {
+        testSimpleCreateFailure: function () {
             // create test
             var t = new Test({
                 relatedTo: bwfSpec.relatedTo,
                 name: 'testSimpleCreateFailure',
                 result: true
-            });
+            })
 
             // do test
             try {
-                var bwf = new Bwf('TestClass: { className: string ').create();
+                var bwf = new Bwf('TestClass: { className: string ').create()
 
                 if (TestClass) {
-                    t.result = false;
-                    t.trace = 'Class created, but expected is not!';
+                    t.result = false
+                    t.trace = 'Class created, but expected is not!'
                 }
             } catch (e) {
-                t.trace = t.trace + e.toString().replace('JSON', 'Bwf');
+                t.trace = t.trace + e.toString().replace('JSON', 'Bwf')
             }
 
             //save test
-            t.save();
-            return t.result;
+            t.save()
+            return t.result
         },
 
         /**
          * Test for instancing a complex class with Bwf successfully
          */
-        testComplexCreateSuccess: function() {
+        testComplexCreateSuccess: function () {
             // create test
             var t = new Test({
                 relatedTo: bwfSpec.relatedTo,
                 name: 'testComplexCreateSuccess',
                 result: false
-            });
+            })
 
             // do test
             try {
@@ -170,31 +169,31 @@ var bwfSpec = {
                                             to: string\
                                         }\
                                     }\
-                                }').create();
+                                }').create()
 
                 if (TestClass2) {
-                    t.result = true;
-                    t.trace = 'Class created successfully!';
+                    t.result = true
+                    t.trace = 'Class created successfully!'
                 }
             } catch (e) {
-                t.trace = t.trace + e.stack.toString().replace('JSON', 'Bwf');
+                t.trace = t.trace + e.stack.toString().replace('JSON', 'Bwf')
             }
 
             //save test
-            t.save();
-            return t.result;
+            t.save()
+            return t.result
         },
 
         /**
          * Test for instancing a complex class with Bwf unsuccessfully
          */
-        testComplexCreateFailure: function() {
+        testComplexCreateFailure: function () {
             // create test
             var t = new Test({
                 relatedTo: bwfSpec.relatedTo,
                 name: 'testComplexCreateFailure',
                 result: true
-            });
+            })
 
             // do test
             try {
@@ -211,91 +210,91 @@ var bwfSpec = {
                                             to: string\
                                         }\
                                     }\
-                                }').create();
+                                }').create()
 
                 if (TestClass2) {
-                    t.result = false;
-                    t.trace = 'Class created, but expected is not!';
+                    t.result = false
+                    t.trace = 'Class created, but expected is not!'
                 }
             } catch (e) {
-                t.trace = t.trace + e.toString().replace('JSON', 'Bwf');
+                t.trace = t.trace + e.toString().replace('JSON', 'Bwf')
             }
 
             //save test
-            t.save();
-            return t.result;
+            t.save()
+            return t.result
         },
 
         /**
          * Test for valuating a simple class with Bwf successfully
          */
-        testSimpleValuateSuccess: function() {
+        testSimpleValuateSuccess: function () {
             // create test
             var t = new Test({
                 relatedTo: bwfSpec.relatedTo,
                 name: 'testSimpleValuateSuccess',
                 result: false
-            });
+            })
 
             // do test
             try {
                 var v = classLoader.valuate('TestClass: {\
                                     			className: asd\
-                                    		}');
+                                    		}')
 
                 if (v.className === 'asd') {
-                    t.result = true;
-                    t.trace = 'Class valuated successfully!';
+                    t.result = true
+                    t.trace = 'Class valuated successfully!'
                 }
             } catch (e) {
-                t.trace = t.trace + e.stack.toString().replace('JSON', 'Bwf');
+                t.trace = t.trace + e.stack.toString().replace('JSON', 'Bwf')
             }
 
             //save test
-            t.save();
-            return t.result;
+            t.save()
+            return t.result
         },
 
         /**
          * Test for valuating a simple class with Bwf unsuccessfully
          */
-        testSimpleValuateFailure: function() {
+        testSimpleValuateFailure: function () {
             // create test
             var t = new Test({
                 relatedTo: bwfSpec.relatedTo,
                 name: 'testSimpleValuateFailure',
                 result: true
-            });
+            })
 
             // do test
             try {
                 var v = classLoader.valuate('TestClass: {\
                                     			className: asd!\
-                                    		}');
+                                    		}')
 
                 if (v['className'] === undefined) {
-                    t.result = false;
-                    t.trace = 'Class valuated, but expected is not!';
+                    t.result = false
+                    t.trace = 'Class valuated, but expected is not!'
                 }
             } catch (e) {
-                t.trace = t.trace + e.toString().replace('JSON', 'Bwf');
+                t.trace = t.trace + e.toString().replace('JSON', 'Bwf')
             }
 
             //save test
-            t.save();
-            return t.result;
+            t.save()
+            return t.result
         },
 
         /**
          * Test for valuating a complex class with Bwf successfully
          */
-        testComplexValuateSuccess: function() {
+        testComplexValuateSuccess: function () {
             // create test
             var t = new Test({
                 relatedTo: bwfSpec.relatedTo,
                 name: 'testComplexValuateSuccess',
                 result: false
-            });
+            })
 
             // do test
             try {
@@ -311,31 +310,33 @@ var bwfSpec = {
                                                         to: you\
                                                     }\
                                                 }\
-                                            }');
+                                            }')
 
-                if ((v.className === 'all OK') && (v.misc === { states: [ true, false ] })) {
-                    t.result = true;
-                    t.trace = 'Class valuated successfully!';
+                if ((v.className === 'all OK') && (v.misc === {
+                        states: [true, false]
+                    })) {
+                    t.result = true
+                    t.trace = 'Class valuated successfully!'
                 }
             } catch (e) {
-                t.trace = t.trace + e.stack.toString().replace('JSON', 'Bwf');
+                t.trace = t.trace + e.stack.toString().replace('JSON', 'Bwf')
             }
 
             //save test
-            t.save();
-            return t.result;
+            t.save()
+            return t.result
         },
 
         /**
          * Test for valuating a complex class with Bwf unsuccessfully
          */
-        testComplexValuateFailure: function() {
+        testComplexValuateFailure: function () {
             // create test
             var t = new Test({
                 relatedTo: bwfSpec.relatedTo,
                 name: 'testComplexValuateFailure',
                 result: true
-            });
+            })
 
             // do test
             try {
@@ -351,19 +352,19 @@ var bwfSpec = {
                                                         to: you\
                                                     }\
                                                 }\
-                                            }');
+                                            }')
 
                 if (v['className'] === undefined) {
-                    t.result = false;
-                    t.trace = 'Class valuated, but expected is not!';
+                    t.result = false
+                    t.trace = 'Class valuated, but expected is not!'
                 }
             } catch (e) {
-                t.trace = t.trace + e.toString().replace('JSON', 'Bwf');
+                t.trace = t.trace + e.toString().replace('JSON', 'Bwf')
             }
 
             //save test
-            t.save();
-            return t.result;
+            t.save()
+            return t.result
         }
     }
-};
+}

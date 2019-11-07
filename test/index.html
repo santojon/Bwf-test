@@ -1,44 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Tests results</title>
-		<style type="text/css">
-			.failureStr {
-				color: #a94442 !important;
-				background-color: #f7e8e8 !important;
-			}
-			
-			.failure {
-				color: #a94442 !important;
-			}
-			
-			.successStr {
-				color: #3c763d !important;
-				background-color: #f4f9f3 !important;
-			}
-			
-			.success {
-				color: #3c763d !important;
-			}
-			
-			.set {
-				margin-top: 30px !important;
-			}
-		</style>
-	</head>
-	<body>
-		<script type="text/javascript" src="../src/lib/base.js"></script>
-		<script type="text/javascript" src="app.js"></script>
-		
-		<div class="container">
-			<h1 id="title" hidden="hidden">
-				Tests results
-				<a href="../" class="btn btn-default pull-left mRight10">
-					<span class="glyphicon glyphicon-home"></span> Home
-				</a>
-			</h1>
-			
-			<div id="tests-results"></div>
-		</div>
-	</body>
+
+<head>
+	<title>Tests results</title>
+	<style type="text/css">
+		.failureStr {
+			color: #a94442 !important;
+			background-color: #f7e8e8 !important;
+		}
+
+		.failure {
+			color: #a94442 !important;
+		}
+
+		.successStr {
+			color: #3c763d !important;
+			background-color: #f4f9f3 !important;
+		}
+
+		.success {
+			color: #3c763d !important;
+		}
+
+		.set {
+			margin-top: 30px !important;
+		}
+	</style>
+</head>
+
+<body>
+	<script type="text/javascript" src="../lib/sgfd/sgfd.js"></script>
+
+	<div class="container">
+		<h1 id="title" hidden="hidden">
+			<a href="../" class="btn btn-default pull-left mRight10" style="margin-right: 10px;">
+				<span class="glyphicon glyphicon-home"></span> Home
+			</a>
+			Tests results
+		</h1>
+
+		<div id="tests-results"> </div>
+	</div>
+
+	<script type="text/javascript">
+		new Sgfd('conf.js').load()
+	</script>
+</body>
+
 </html>

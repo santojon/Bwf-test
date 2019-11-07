@@ -1,0 +1,6 @@
+Test: {
+    name: string,
+    relatedTo: string,
+    result: boolean,
+    trace: string
+}

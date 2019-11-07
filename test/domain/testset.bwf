@@ -1,0 +1,7 @@
+Testset: {
+    relatedTo: string,
+    date: string,
+    tests: list,
+    failure: number,
+    success: number
+}

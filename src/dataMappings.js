@@ -1,3 +1,2 @@
 // Map class to 'database'
-dataPool.map(User);
-dataPool.map(Dashboard);
+dataPool.map(User, Dashboard)
