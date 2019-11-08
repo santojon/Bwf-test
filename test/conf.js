@@ -4,7 +4,9 @@ var appConfig = {
         // scripts: ['utils'],
         externalStyles: [
             'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
-            'https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'
+            'https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css',
+            'https://bootswatch.com/3/slate/bootstrap.min.css',
+            '../src/assets/css/style.css',
         ],
         externalScripts: [
             '../src/assets/js/utils.js',

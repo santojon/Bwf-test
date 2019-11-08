@@ -19,3 +19,7 @@
 .mLeft10 {
 	margin-left: 10px !important;
 }
+
+code {
+	background-color: transparent !important;
+}
