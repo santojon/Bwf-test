@@ -26,6 +26,7 @@ pages.Dashboards = function (params) {
             }
         )
 
+        // Add all users to dropdown
         allUsers.forEach(
             function (user) {
                 if (user !== currentUser) {
@@ -38,9 +39,10 @@ pages.Dashboards = function (params) {
             }
         )
 
+        // Buttons actions
         document.getElementById('btn-create-dshb').onclick = createDashboard
         document.getElementById('btn-dump').onclick = function () {
-            console.log(dataPool.exportAs('json'))
+            console.log(dataPool.export('json', 4))
         }
 
         // Show all hidden things in screen

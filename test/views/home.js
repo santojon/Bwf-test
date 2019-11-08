@@ -1,7 +1,10 @@
 pages.Home = function (params) {
+    // Tests results
     var res = new Slpnr({
         sets: specs
     }).run()
+
+    // SHow all results as a pretty list on screen
     Object.keys(res).forEach(
         function (tset) {
             Utils.appendDiv('tests-results', tset, 'set')
@@ -16,5 +19,11 @@ pages.Home = function (params) {
         }
     )
 
+    // Print tests page button action
+    $('#btn-print')[0].onclick = () => {
+        print()
+    }
+
+    // Show the page
     Utils.unhideAll()
 }
