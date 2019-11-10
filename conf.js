@@ -20,10 +20,10 @@ var appConfig = {
         appName: 'Dashboards',
         // language: navigator.language || 'en-US',
         dependencies: [
-            '../lib/slpnr/slpnr.js',
-            '../lib/frgg/frgg.js',
-            '../lib/bhdr/bhdr.js',
-            '../lib/bwf/bwf.full.js'
+            'lib/slpnr/slpnr.js',
+            'lib/frgg/frgg.js',
+            'lib/bhdr/bhdr.js',
+            'lib/bwf/bwf.full.js'
         ],
         dataPool: 'Bhdr',
         classLoader: 'Bwf',
