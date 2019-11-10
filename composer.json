@@ -1,0 +1,14 @@
+{
+    "extra": {
+        "heroku": {
+            "document-root": "./",
+            "index-document": "index.html",
+            "php-config": [
+                "short_open_tag=on",
+                "date.timezone=America/Brasil",
+                "newrelic.appname=mindr"
+            ],
+            "newrelic": true
+        }
+    }
+}
