@@ -1,7 +1,4 @@
-/**
- * The main page
- */
-
+syncSession()
 pages.Dashboards({
     username: 'manolo'
 })

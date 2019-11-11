@@ -1,4 +1,4 @@
-pages.Dashboards = function (params) {
+pages.Dashboards = (params) => {
     // Get all needed scopes (another js objects like controllers, services etc.)
     with(
         Sgfd.Base.merge(
@@ -6,25 +6,29 @@ pages.Dashboards = function (params) {
             Utils
         )
     ) {
-        var currentUser = User.find({
-            username: params ? (params.username ? params.username : 'santojon') : 'santojon'
-        })
         var allUsers = User.findAll().distinct()
+        if (params) {
+            // Get Current User
+            var currentUser = User.find({
+                username: params.username ? params.username : 'santojon'
+            })
 
-        // add current user username to screen
-        var div = document.createElement('small')
-        div.innerHTML = ' <code id="currentUser">' + currentUser.username + '</code>'
-        document.getElementById('title').appendChild(div)
+            // add current user username to screen
+            var div = document.createElement('small')
+            div.innerHTML = ' <code id="currentUser">' + currentUser.username + '</code>'
+            document.getElementById('title').appendChild(div)
 
-        // Add all defined dashboards for user to screen
-        var dashboards = Dashboard.findBy({
-            owner: currentUser
-        }).distinct()
-        dashboards.forEach(
-            function (dashboard) {
-                appendDashboard('dashboards', dashboard)
-            }
-        )
+            // Add all defined dashboards for user to screen
+            var dashboards = Dashboard.findBy({
+                owner: currentUser
+            }).distinct()
+
+            dashboards.forEach(
+                function (dashboard) {
+                    appendDashboard('dashboards', dashboard)
+                }
+            )
+        }
 
         // Add all users to dropdown
         allUsers.forEach(

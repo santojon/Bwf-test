@@ -1,2 +1,5 @@
 // Map class to 'database'
-dataPool.map(User, Dashboard)
+dataPool.map(
+    User,
+    Dashboard
+)

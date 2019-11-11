@@ -13,8 +13,10 @@ var appConfig = {
         ]
     },
     back: {
-        full: ['user', 'dashboard'],
-        services: ['security']
+        views: ['dashboard'],
+        bwfDomains: ['user', 'dashboard'],
+        domainClasses: ['dashboard'],
+        controllers: ['dashboard']
     },
     conf: {
         appName: 'Dashboards',
