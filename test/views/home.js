@@ -13,7 +13,9 @@ pages.Home = function (params) {
 
             res[tset].tests.forEach(
                 function (result) {
-                    Utils.appendTest(tset, new Test(result))
+                    if (result.relatedTo === tset) {
+                        Utils.appendTest(tset, new Test(result))
+                    }
                 }
             )
         }
