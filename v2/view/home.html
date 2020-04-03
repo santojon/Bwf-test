@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Dashboards</title>
+    <meta charset="UTF-8">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/3/slate/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1 id="title">
+            <div class="btn-group pull-left mRight10">
+                <button id="btn-chg-usr" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Change user <span class="caret"></span>
+                </button>
+                <ul id="chg-lst" class="dropdown-menu"></ul>
+            </div>
+            Dashboards
+            {{#currentUser}}
+            <small>
+                <code>
+                    {{name}}
+                </code>
+            </small>
+            {{/currentUser}}
+
+            {{^currentUser}}
+            {{/currentUser}}
+        </h1>
+    </div>
+    <div id="dashboards" class="container">
+        {{#dashboards}}
+        {{> dashboard}}
+        {{/dashboards}}
+
+        {{^dashboards}}
+        <b>
+            No Dashboards :'(
+        </b>
+        {{/dashboards}}
+    </div>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</body>
+
+</html>

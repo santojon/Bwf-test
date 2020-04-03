@@ -1,7 +1,7 @@
 Dashboard: {
     name: string,
-    owner: object,
+    owner: User,
     tiles: list,
-    base: string,
+    base: Dashboard,
     extras: object
 }

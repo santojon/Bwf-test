@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<script type="text/javascript" src="lib/sgfd/sgfd.js"></script>
+	<script type="text/javascript" src="../../libs/sgfd/sgfd.js"></script>
 
 	<div class="container" hidden="true">
 		<h1 id="title">
@@ -35,7 +35,7 @@
 	</div>
 
 	<script type="text/javascript">
-		new Sgfd('conf.js').load()
+		new Sgfd('conf.js', { externalSettings: '../../settings.js' }).load()
 	</script>
 </body>
 

@@ -1,12 +1,17 @@
 pages.Dashboards = (params) => {
     // Get all needed scopes (another js objects like controllers, services etc.)
-    with(
-        Sgfd.Base.merge(
-            DashboardController,
-            Utils
-        )
+    with (
+    Sgfd.Base.merge(
+        DashboardController,
+        Utils
+    )
     ) {
-        var allUsers = User.findAll().distinct()
+        var allUsers = new DbArray()
+        User.findAll().forEach((user) => {
+            allUsers.push(user)
+        })
+
+        allUsers = allUsers.distinct()
         if (params) {
             // Get Current User
             var currentUser = User.find({
@@ -19,10 +24,14 @@ pages.Dashboards = (params) => {
             document.getElementById('title').appendChild(div)
 
             // Add all defined dashboards for user to screen
-            var dashboards = Dashboard.findBy({
+            var dashboards = new DbArray()
+            Dashboard.findBy({
                 owner: currentUser
-            }).distinct()
+            }).forEach((dashboard) => {
+                dashboards.push(dashboard)
+            })
 
+            dashboards = dashboards.distinct()
             dashboards.forEach(
                 function (dashboard) {
                     appendDashboard('dashboards', dashboard)
